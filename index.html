@@ -1,289 +1,107 @@
 <!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>JessyGist | Latest News and Entertainment</title>
-
-<meta name="description" content="Get the latest news, entertainment, sports updates and trending stories on JessyGist.">
-
-<link rel="stylesheet" href="style.css">
-
-<script src="script.js" defer></script>
-
-</head><body>
-    <!-- HEADER -->
-<header class="site-header">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JessyGist - Latest News and Entertainment</title>
+    <meta name="description" content="Read the latest news, entertainment, sports, and trending stories on JessyGist.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body><header class="header">
     <div class="logo">Jessy<span>Gist</span></div>
-
-    <p>Your home for news, entertainment, sports and trending stories.</p>
-
-    <nav class="navigation">
-        <a href="#home">Home</a>
-        <a href="#news">Latest News</a>
-        <a href="#entertainment">Entertainment</a>
-        <a href="#sports">Sports</a>
-    </nav>
+    <p>Your Daily Dose of News and Entertainment</p>
 </header>
 
-<!-- MAIN HOMEPAGE -->
+<nav class="navbar">
+    <a href="#home">Home</a>
+    <a href="#news">Latest News</a>
+    <a href="#entertainment">Entertainment</a>
+    <a href="#sports">Sports</a>
+    <a href="#submit">Submit a Story</a>
+</nav>
+
 <main id="home" class="container">
 
     <section class="welcome">
         <h1>Welcome to JessyGist</h1>
-        <p>Discover the stories everyone is talking about.</p>
+        <p>Stay informed with the latest news, celebrity gist, sports updates, and trending stories.</p>
     </section>
 
-    <!-- SEARCH -->
     <section class="search-section">
-        <input
-            type="search"
-            class="search-box"
-            id="search-input"
-            placeholder="Search news, sports or entertainment..."
-            aria-label="Search stories"
-        >
-        <p id="search-message" aria-live="polite"></p>
+        <input type="search" id="searchInput" placeholder="Search stories..." aria-label="Search stories">
     </section>
 
-    
-    <!-- VISITOR NEWS SUBMISSION FORM --><section id="submit-news" class="submission-section"><h2>Submit Your Story</h2>
-
-<p>
-    Have an interesting story? Send it to JessyGist for review.
-</p>
-
-        <form
-            id="news-submission-form"
-            action="https://formspree.io/f/myekwalj"
-            method="POST">
-
-    <label for="visitor-name">Your Name</label>
-    <input
-        type="text"
-        id="visitor-name"
-        name="visitorName"
-        placeholder="Enter your name"
-        maxlength="80"
-        required
-    >
-
-    <label for="article-title">Article Title</label>
-    <input
-        type="text"
-        id="article-title"
-        name="articleTitle"
-        placeholder="Enter your story headline"
-        maxlength="150"
-        required
-    >
-
-    <label for="article-category">News Category</label>
-    <select id="article-category" name="articleCategory" required>
-        <option value="">Choose a category</option>
-        <option value="Sports">Sports</option>
-        <option value="Entertainment">Entertainment</option>
-        <option value="Politics">Politics</option>
-        <option value="Trending">Trending News</option>
-    </select>
-
-    <label for="article-image">Image Link (Optional)</label>
-    <input
-        type="url"
-        id="article-image"
-        name="articleImage"
-        placeholder="https://example.com/image.jpg"
-    >
-
-    <label for="article-story">Your Full Story</label>
-    <textarea
-        id="article-story"
-        name="articleStory"
-        rows="7"
-        maxlength="10000"
-        placeholder="Write your story here..."
-        required
-    ></textarea>
-
-    <button type="submit" class="read-more">
-        Submit Story for Review
-    </button>
-
-    <p id="submission-message" role="status" aria-live="polite"></p>
-
-</form>
-
-    </section>
-
-    <!-- NEWS CARDS -->
     <section id="news">
-
-        <h2 class="section-title">Latest Stories</h2>
-        <!-- APPROVED VISITOR STORY -->
-<article class="news-card">
-
-    <img
-        src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=80"
-        alt="News">
-
-    <div class="news-content">
-
-        <span class="category">Community News</span>
-
-        <h3>Community Story Published on JessyGist</h3>
-
-        <p>
-            This is a sample approved visitor story.
-            Replace this text with the reviewed story before publication.
-        </p>
-
-        <p class="publication-status">Published</p>
-        <button class="read-more" type="button" data-story="visitorSample">
-    Read Full Story
-        </button>
-
-    </div>
-
-</article>
+        <h2>Latest Stories</h2>
 
         <div class="news-grid">
 
-            <!-- SPORTS -->
-            <article class="news-card" id="sports">
-
-                <img
-                    src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=700&q=80"
-                    alt="Athletes competing in a sporting event"
-                >
-
-                <div class="news-content">
-                    <span class="category">Sports</span>
-
-                    <h3>Sports Updates and Trending Stories</h3>
-
-                    <p>Stay updated with exciting sports news and developments.</p>
-
-                    <button
-                        class="read-more"
-                        data-story="sports"
-                    >Read Full Story</button>
-                </div>
-
-            </article>
-
-            <!-- ENTERTAINMENT -->
             <article class="news-card" id="entertainment">
-
-                <img
-                    src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=700&q=80"
-                    alt="Cinema seats"
-                >
-
+                <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=900&q=80" alt="Entertainment">
                 <div class="news-content">
                     <span class="category">Entertainment</span>
-
                     <h3>Entertainment News and Celebrity Gist</h3>
-
-                    <p>Discover the latest entertainment stories and celebrity updates.</p>
-
-                    <button
-                        class="read-more"
-                        data-story="entertainment"
-                    >Read Full Story</button>
+                    <p>Discover entertainment updates, celebrity stories, and the latest happenings in the world of entertainment.</p>
+                    <button class="read-more" data-story="entertainment">Read More</button>
                 </div>
-
             </article>
 
-            <!-- TRENDING NEWS -->
-            <article class="news-card">
-
-                <img
-                    src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=700&q=80"
-                    alt="Newspapers and news coverage"
-                >
-
+            <article class="news-card" id="sports">
+                <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=80" alt="Sports">
                 <div class="news-content">
-                    <span class="category">Trending</span>
-
-                    <h3>Trending Stories Making Headlines</h3>
-
-                    <p>Catch up on important stories and topics attracting attention.</p>
-
-                    <button
-                        class="read-more"
-                        data-story="trending"
-                    >Read Full Story</button>
+                    <span class="category">Sports</span>
+                    <h3>Sports Updates and Trending Stories</h3>
+                    <p>Follow sporting events, team performances, match reports, and exciting sports stories.</p>
+                    <button class="read-more" data-story="sports">Read More</button>
                 </div>
-
             </article>
-            
-            <!-- POLITICS NEWS CARD -->
-<article class="news-card">
 
-    <img
-        src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=700&q=80"
-        alt="Politics and government">
-
-    <div class="news-content">
-
-        <span class="category">Politics</span>
-
-        <h3>Latest Political News and Updates</h3>
-
-        <p>Follow political developments, government policies and public affairs.</p>
-
-        <button
-            class="read-more"
-            data-story="politics"
-        >Read Full Story</button>
-
-    </div>
-
-</article>
+            <article class="news-card">
+                <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=900&q=80" alt="News">
+                <div class="news-content">
+                    <span class="category">Trending News</span>
+                    <h3>Trending Stories Making Headlines</h3>
+                    <p>Explore current affairs, community developments, technology, and topics people are discussing.</p>
+                    <button class="read-more" data-story="trending">Read More</button>
+                </div>
+            </article>
 
         </div>
-
-        <p id="no-results" hidden>No stories found. Try another search.</p>
-
     </section>
 
-    <!-- FULL STORY PAGE -->
-    <section id="story-page" class="story-page" hidden>
+    <section id="storyPage" class="story-page" hidden>
+        <button id="backButton" type="button">← Back to Stories</button>
+        <article id="storyDetails"></article>
+    </section>
 
-        <button id="back-button" class="back-button" type="button">
-            &larr; Back to News
-        </button>
+    <section id="submit" class="submit-section">
+        <h2>Submit Your Story</h2>
+        <p>Have a story to share? Send it to the JessyGist team for review.</p>
 
-        <article class="full-story">
+        <form action="https://formspree.io/f/myekwalj" method="POST">
+            <label for="visitorName">Your Name</label>
+            <input id="visitorName" type="text" name="name" placeholder="Enter your name" required>
 
-            <span id="story-category" class="category"></span>
+            <label for="visitorEmail">Your Email</label>
+            <input id="visitorEmail" type="email" name="email" placeholder="Enter your email" required>
 
-            <h1 id="story-title"></h1>
+            <label for="storyTitle">Story Title</label>
+            <input id="storyTitle" type="text" name="story_title" placeholder="Enter your story title" required>
 
-            <p id="story-date" class="story-date"></p>
+            <label for="storyContent">Your Story</label>
+            <textarea id="storyContent" name="story" rows="6" placeholder="Write your story here..." required></textarea>
 
-            <img id="story-image" src="" alt="">
-
-            <div id="story-content" class="story-content"></div>
-
-        </article>
-
-        <button id="bottom-back-button" class="back-button" type="button">
-            &larr; Back to News
-        </button>
-
+            <button type="submit">Submit Story</button>
+        </form>
     </section>
 
 </main>
 
-<!-- FOOTER -->
-<footer class="site-footer">
-    <p>&copy; 2026 JessyGist. All Rights Reserved.</p>
-
-    <div class="footer-links">
-        <a href="about.html">About Us</a>
-        <a href="contact.html">Contact Us</a>
-        <a href="privacy-policy.html">Privacy Policy</a>
-    </div>
+<footer class="footer">
+    <p>&copy; <span id="year"></span> JessyGist. All rights reserved.</p>
+    <p>News, entertainment, sports, and trending stories.</p>
 </footer>
+
+<script src="script.js"></script>
 
 </body>
 </html>
