@@ -262,3 +262,24 @@ font-size: 30px;
 }
 
 }
+/* Publisher Profile */
+.publisher-profile {
+background: #f4f7fb;
+padding: 20px;
+margin: 25px 0;
+border-radius: 10px;
+border-left: 5px solid #e63946;
+line-height: 1.7;
+}
+
+.publisher-profile h3 {
+color: #e63946;
+margin-top: 0;
+margin-bottom: 12px;
+}
+
+.publisher-profile p {
+color: #333;
+margin-bottom: 10px;
+font-size: 15px;
+}
