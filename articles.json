@@ -1,0 +1,38 @@
+[
+{
+"id": 1,
+"category": "Nigerian News",
+"title": "Welcome to JessyGist: Your Source for Nigerian News",
+"image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=900&q=80",
+"excerpt": "Discover Nigerian news, current affairs, and important developments on JessyGist.",
+"content": [
+"Welcome to JessyGist, your destination for Nigerian news, entertainment, sports, and trending stories.",
+"Our goal is to help readers discover useful information through clear, engaging, and responsible reporting.",
+"We will continue adding original articles and verified updates as our website grows."
+]
+},
+{
+"id": 2,
+"category": "Entertainment",
+"title": "Nollywood and Nigerian Entertainment: What Readers Should Know",
+"image": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=900&q=80",
+"excerpt": "Explore Nigerian movies, music, celebrity stories, and the entertainment industry.",
+"content": [
+"Nigeria has a vibrant entertainment industry, with filmmakers, musicians, actors, and other creative professionals reaching audiences at home and abroad.",
+"JessyGist will cover entertainment developments, film releases, music news, and celebrity stories using reliable sources.",
+"Specific news about people and events will be added after the information has been checked."
+]
+},
+{
+"id": 3,
+"category": "Sports",
+"title": "Following Nigerian Football and Sporting Talent",
+"image": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=80",
+"excerpt": "Follow Nigerian football, sporting competitions, and athletes making headlines.",
+"content": [
+"Sports connect communities and bring fans together through competition, teamwork, and shared excitement.",
+"JessyGist plans to cover Nigerian football, international competitions, player performances, and other sporting developments.",
+"Match results, fixtures, and transfer reports will need to be checked against reliable sources before publication."
+]
+}
+]
