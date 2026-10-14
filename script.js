@@ -107,3 +107,17 @@ if (yearElement) {
 }
 
 });
+// LOAD ARTICLES FROM articles.json
+fetch("articles.json")
+.then(function (response) {
+if (!response.ok) {
+throw new Error("Could not load articles.");
+}
+return response.json();
+})
+.then(function (articles) {
+console.log("JessyGist articles loaded:", articles);
+})
+.catch(function (error) {
+console.error("Article loading error:", error);
+});
