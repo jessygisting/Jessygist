@@ -1,0 +1,11 @@
+{
+"name": "JessyGist - Latest News and Entertainment",
+"short_name": "JessyGist",
+"description": "Read Nigerian news, entertainment, sports, and trending stories on JessyGist.",
+"start_url": "./",
+"scope": "./",
+"display": "standalone",
+"orientation": "portrait",
+"background_color": "#ffffff",
+"theme_color": "#1769aa"
+}
