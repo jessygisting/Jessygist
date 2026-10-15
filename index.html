@@ -132,8 +132,20 @@
     <p>&copy; <span id="year"></span> JessyGist. All rights reserved.</p>
     <p>News, entertainment, sports, and trending stories.</p>
 </footer>
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
+    <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./sw.js")
+        .then(function () {
+          console.log("JessyGist service worker registered successfully.");
+        })
+        .catch(function (error) {
+          console.error("Service worker registration failed:", error);
+        });
+    });
+  }
+</script>
 </body>
 </html>
+
