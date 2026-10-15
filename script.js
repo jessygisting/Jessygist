@@ -107,17 +107,104 @@ if (yearElement) {
 }
 
 });
-// LOAD ARTICLES FROM articles.json
+/* DISPLAY ARTICLES FROM articles.json */
+
 fetch("articles.json")
 .then(function (response) {
 if (!response.ok) {
-throw new Error("Could not load articles.");
+throw new Error("Unable to load articles.");
 }
 return response.json();
 })
 .then(function (articles) {
-console.log("JessyGist articles loaded:", articles);
+const newsGrid = document.getElementById("newsGrid");
+
+if (!newsGrid || !Array.isArray(articles)) {
+  return;
+}
+
+articles.forEach(function (article) {
+  const card = document.createElement("article");
+  card.className = "news-card";
+
+  const image = document.createElement("img");
+  image.src = article.image;
+  image.alt = article.category || "News";
+  image.loading = "lazy";
+
+  const content = document.createElement("div");
+  content.className = "news-content";
+
+  const category = document.createElement("span");
+  category.className = "category";
+  category.textContent = article.category || "News";
+
+  const title = document.createElement("h3");
+  title.textContent = article.title || "Untitled story";
+
+  const excerpt = document.createElement("p");
+  excerpt.textContent = article.excerpt || "";
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.textContent = "Read More";
+
+  button.addEventListener("click", function () {
+    const storyPage = document.getElementById("storyPage");
+    const storyDetails = document.getElementById("storyDetails");
+    const newsSection = document.getElementById("news");
+    const searchSection = document.querySelector(".search-section");
+    const welcomeSection = document.querySelector(".welcome");
+    const submitSection = document.getElementById("submit");
+
+    if (!storyPage || !storyDetails) {
+      return;
+    }
+
+    storyDetails.replaceChildren();
+
+    const storyCategory = document.createElement("span");
+    storyCategory.className = "category";
+    storyCategory.textContent = article.category || "News";
+    storyDetails.appendChild(storyCategory);
+
+    const storyTitle = document.createElement("h2");
+    storyTitle.textContent = article.title || "Untitled story";
+    storyDetails.appendChild(storyTitle);
+
+    if (article.image) {
+      const storyImage = document.createElement("img");
+      storyImage.src = article.image;
+      storyImage.alt = article.category || "News";
+      storyDetails.appendChild(storyImage);
+    }
+
+    (article.content || []).forEach(function (paragraph) {
+      const p = document.createElement("p");
+      p.textContent = paragraph;
+      storyDetails.appendChild(p);
+    });
+
+    if (newsSection) newsSection.hidden = true;
+    if (searchSection) searchSection.hidden = true;
+    if (welcomeSection) welcomeSection.hidden = true;
+    if (submitSection) submitSection.hidden = true;
+
+    storyPage.hidden = false;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  content.appendChild(category);
+  content.appendChild(title);
+  content.appendChild(excerpt);
+  content.appendChild(button);
+
+  card.appendChild(image);
+  card.appendChild(content);
+  newsGrid.appendChild(card);
+});
+
 })
 .catch(function (error) {
-console.error("Article loading error:", error);
+console.error("JessyGist article loading error:", error);
 });
