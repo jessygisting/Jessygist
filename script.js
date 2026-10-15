@@ -46,14 +46,18 @@ const stories = {
 
 // SEARCH STORIES
 if (searchInput) {
-    searchInput.addEventListener("input", function () {
-        const searchText = searchInput.value.toLowerCase().trim();
+searchInput.addEventListener("input", function () {
+const searchText = searchInput.value.toLowerCase().trim();
 
-        newsCards.forEach(function (card) {
-            const cardText = card.innerText.toLowerCase();
-            card.style.display = cardText.includes(searchText) ? "" : "none";
-        });
+    document.querySelectorAll(".news-card").forEach(function (card) {
+        const cardText = card.innerText.toLowerCase();
+
+        card.style.display = cardText.includes(searchText)
+            ? ""
+            : "none";
     });
+});
+
 }
 
 // OPEN A STORY
