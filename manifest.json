@@ -1,18 +1,19 @@
 {
-  "name": "JessyGist - Latest News and Entertainment",
-  "short_name": "JessyGist",
-  "description": "Read Nigerian news, entertainment, sports, and trending stories on JessyGist.",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#1769aa",
-  "orientation": "portrait",
-  "icons": [
-    {
-      "src": "./a67e8b7.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+"name": "JessyGist - Latest News and Entertainment",
+"short_name": "JessyGist",
+"description": "Read Nigerian news, entertainment, sports, and trending stories on JessyGist.",
+"start_url": "./",
+"scope": "./",
+"display": "standalone",
+"background_color": "#ffffff",
+"theme_color": "#1769aa",
+"orientation": "portrait",
+"icons": [
+{
+"src": "./a67e8b7.png",
+"sizes": "512x512",
+"type": "image/png",
+"purpose": "any"
+}
+]
 }
