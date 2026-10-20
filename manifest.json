@@ -1,26 +1,29 @@
+
 {
 "id": "./",
 "name": "JessyGist - Latest News and Entertainment",
 "short_name": "JessyGist",
-"description": "Read Nigerian news, entertainment, sports, and trending stories on JessyGist.",
+"description": "Read the latest Nigerian news, entertainment, sports, celebrity gossip, and trending stories on JessyGist.",
 "start_url": "./",
 "scope": "./",
 "display": "standalone",
+"orientation": "portrait",
 "background_color": "#ffffff",
 "theme_color": "#1769aa",
-"orientation": "portrait",
+"dir": "auto",
+"lang": "en",
+"prefer_related_applications": false,
+"categories": [
+"news",
+"entertainment",
+"sports"
+],
 "icons": [
 {
 "src": "./icon-512.png",
 "sizes": "512x512",
 "type": "image/png",
 "purpose": "any"
-},
-{
-"src": "./icon-512.png",
-"sizes": "512x512",
-"type": "image/png",
-"purpose": "maskable"
 }
 ]
 }
