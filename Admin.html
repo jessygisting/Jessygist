@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>JessyGist Admin Dashboard</title>
+  <style>
+    * { box-sizing: border-box; }body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f5f9;
+  color: #243447;
+}
+
+header {
+  background: #102a43;
+  color: white;
+  padding: 22px 16px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0 0 8px;
+  color: #ffca28;
+}
+
+header p { margin: 0; }
+
+main {
+  width: min(900px, 94%);
+  margin: 25px auto;
+}
+
+.notice {
+  background: #fff4ce;
+  border-left: 5px solid #e0a800;
+  padding: 14px;
+  line-height: 1.6;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.panel {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  margin-bottom: 22px;
+  box-shadow: 0 3px 12px #102a4310;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin: 16px 0 7px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  font: inherit;
+}
+
+textarea {
+  min-height: 220px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+button {
+  border: 0;
+  border-radius: 7px;
+  padding: 12px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 8px 6px 0 0;
+}
+
+.primary { background: #1769aa; color: white; }
+.secondary { background: #e8eef5; color: #102a43; }
+
+#preview {
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+#preview img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.muted { color: #64748b; font-size: 14px; }
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #64748b;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>JessyGist</h1>
+    <p>Admin Dashboard · News & Entertainment</p>
+  </header>  <main>
+    <div class="notice">
+      <strong>Important:</strong> This is an initial dashboard prototype.
+      It does not yet publish articles to the live website or securely save
+      them online. Do not enter passwords or confidential information here.
+    </div><section class="panel">
+  <h2>Create an Article</h2>
+
+  <form id="articleForm">
+    <label for="title">Article Headline</label>
+    <input id="title" type="text" maxlength="180"
+           placeholder="Enter your headline" required>
+
+    <label for="category">Category</label>
+    <select id="category" required>
+      <option value="Latest News">Latest News</option>
+      <option value="Entertainment">Entertainment</option>
+      <option value="Sports">Sports</option>
+      <option value="Trending">Trending</option>
+    </select>
+
+    <label for="imageUrl">Image URL (optional)</label>
+    <input id="imageUrl" type="url"
+           placeholder="https://example.com/image.jpg">
+
+    <label for="story">Full Article</label>
+    <textarea id="story"
+              placeholder="Write your article here..."
+              required></textarea>
+
+    <button class="primary" type="submit">Preview Article</button>
+    <button class="secondary" type="reset">Clear Form</button>
+  </form>
+</section>
+
+<section class="panel" id="previewPanel" hidden>
+  <h2>Article Preview</h2>
+  <p class="muted" id="previewCategory"></p>
+  <h3 id="previewTitle"></h3>
+  <img id="previewImage" alt="Article image" hidden>
+  <div id="preview"></div>
+  <button class="secondary" id="editButton" type="button">
+    Back to Editing
+  </button>
+</section>
+
+<section class="panel">
+  <h2>Next Development Steps</h2>
+  <ul>
+    <li>Set up secure administrator authentication.</li>
+    <li>Connect an online database for saving articles.</li>
+    <li>Connect article publishing to the JessyGist homepage.</li>
+    <li>Add image uploads and article management.</li>
+  </ul>
+</section>
+
+  </main>  <footer>
+    &copy; 2026 JessyGist. Admin prototype.
+  </footer>  <script>
+    const form = document.getElementById("articleForm");
+    const previewPanel = document.getElementById("previewPanel");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const title = document.getElementById("title").value.trim();
+      const category = document.getElementById("category").value;
+      const imageUrl = document.getElementById("imageUrl").value.trim();
+      const story = document.getElementById("story").value.trim();
+
+      if (!title || !story) {
+        alert("Please enter a headline and the full article.");
+        return;
+      }
+
+      document.getElementById("previewTitle").textContent = title;
+      document.getElementById("previewCategory").textContent = category;
+      document.getElementById("preview").textContent = story;
+
+      const image = document.getElementById("previewImage");
+
+      if (imageUrl) {
+        image.src = imageUrl;
+        image.hidden = false;
+        image.onerror = function() {
+          image.hidden = true;
+          alert("The image could not be loaded. Please check the image URL.");
+        };
+      } else {
+        image.removeAttribute("src");
+        image.hidden = true;
+      }
+
+      previewPanel.hidden = false;
+      previewPanel.scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("editButton").addEventListener("click", function() {
+      previewPanel.hidden = true;
+      document.getElementById("title").focus();
+    });
+  </script>
+</body>
+  </html>
