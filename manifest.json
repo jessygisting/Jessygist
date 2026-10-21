@@ -1,12 +1,12 @@
 
 {
-"id": "./",
-"name": "JessyGist - Latest News and Entertainment",
-"short_name": "JessyGist",
-"description": "Read the latest Nigerian news, entertainment, sports, celebrity gossip, and trending stories on JessyGist.",
-"start_url": "./",
+"id":"./",
+"name":"JessyGist- Latest News and Entertainment",
+"short_name":"JessyGist",
+"description":"Read the latest Nigerian news, entertainment, sports, celebrity gossip, and trending stories on JessyGist.",
+"start_url":"./",
 "scope": "./",
-"display": "standalone",
+"display":"standalone",
 "orientation": "portrait",
 "background_color": "#ffffff",
 "theme_color": "#1769aa",
