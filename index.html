@@ -1,149 +1,491 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#1769aa">
+
     <title>JessyGist - Latest News and Entertainment</title>
-    <meta name="description" content="Read the latest news, entertainment, sports, and trending stories on JessyGist.">
-    <link rel="stylesheet" href="style.css">
+
+    <meta name="description"
+          content="Read the latest Nigerian news, entertainment, celebrity gist, sports, and trending stories on JessyGist.">
+
+    <meta name="theme-color" content="#1769aa">
+
+    <meta name="application-name" content="JessyGist">
+
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-title" content="JessyGist">
+
+    <link rel="manifest" href="./manifest.json">
+
+    <link rel="icon" href="./a67e8b7.png" type="image/png">
+
+    <link rel="apple-touch-icon" href="./a67e8b7.png">
+
+    <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
+
+    <!-- HEADER -->
     <header class="header">
-    <div class="logo">
-        <img src="./icon-512.png" alt="JessyGist Logo" class="site-logo">
-        <h1>JessyGist</h1>
-    </div>
-    <p>Your Daily Dose of News and Entertainment</p>
-    </header>
-    
-<nav class="navbar">
-    <a href="#home">Home</a>
-    <a href="#news">Latest News</a>
-    <a href="#entertainment">Entertainment</a>
-    <a href="#sports">Sports</a>
-    <a href="#submit">Submit a Story</a>
-</nav>
 
-<main id="home" class="container">
+        <div class="logo-container">
+            <a href="./" aria-label="JessyGist Homepage">
+                <img
+                    src="./a67e8b7.png"
+                    alt="JessyGist Logo"
+                    class="logo"
+                    width="60"
+                    height="60"
+                >
+            </a>
 
-    <section class="welcome">
-        <h1>Welcome to JessyGist</h1>
-        <p>Stay informed with the latest news, celebrity gist, sports updates, and trending stories.</p>
-    </section>
-
-    <section class="search-section">
-        <input type="search" id="searchInput" placeholder="Search stories..." aria-label="Search stories">
-    </section>
-
-    <section id="news">
-        <h2>Latest Stories</h2>
-
-        <div class="news-grid" id="newsGrid">
-
-            <article class="news-card" id="entertainment">
-                <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=900&q=80" alt="Entertainment">
-                <div class="news-content">
-                    <span class="category">Entertainment</span>
-                    <h3>Entertainment News and Celebrity Gist</h3>
-                    <p>Discover entertainment updates, celebrity stories, and the latest happenings in the world of entertainment.</p>
-                    <button class="read-more" data-story="entertainment">Read More</button>
-                </div>
-            </article>
-
-            <article class="news-card" id="sports">
-                <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=80" alt="Sports">
-                <div class="news-content">
-                    <span class="category">Sports</span>
-                    <h3>Sports Updates and Trending Stories</h3>
-                    <p>Follow sporting events, team performances, match reports, and exciting sports stories.</p>
-                    <button class="read-more" data-story="sports">Read More</button>
-                </div>
-            </article>
-
-            <article class="news-card">
-                <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=900&q=80" alt="News">
-                <div class="news-content">
-                    <span class="category">Trending News</span>
-                    <h3>Trending Stories Making Headlines</h3>
-                    <p>Explore current affairs, community developments, technology, and topics people are discussing.</p>
-                    <button class="read-more" data-story="trending">Read More</button>
-                </div>
-            </article>
-
+            <div class="brand-text">
+                <h1>Jessy<span>Gist</span></h1>
+                <p>Your Daily Dose of News and Entertainment</p>
+            </div>
         </div>
-    </section>
 
-    <section id="storyPage" class="story-page" hidden>
-        <button id="backButton" type="button">← Back to Stories</button>
-        <article id="storyDetails"></article>
-    </section>
+        <!-- SEARCH -->
+        <div class="search-box">
+            <input
+                type="search"
+                id="newsSearch"
+                placeholder="Search news..."
+                aria-label="Search news"
+            >
 
-    <section id="submit" class="submit-section">
-        <h2>Submit Your Story</h2>
-        <p>Have a story to share? Send it to the JessyGist team for review.</p>
+            <button type="button" id="searchButton">
+                Search
+            </button>
+        </div>
 
-        <form action="https://formspree.io/f/myekwalj" method="POST">
-            <label for="visitorName">Your Name</label>
-            <input id="visitorName" type="text" name="name" placeholder="Enter your name" required>
+        <!-- NAVIGATION -->
+        <nav class="navbar" aria-label="Main navigation">
 
-            <label for="visitorEmail">Your Email</label>
-            <input id="visitorEmail" type="email" name="email" placeholder="Enter your email" required>
+            <a href="./">Home</a>
 
-            <label for="storyTitle">Story Title</label>
-            <input id="storyTitle" type="text" name="story_title" placeholder="Enter your story title" required>
+            <a href="#latest-news">Latest News</a>
 
-            <label for="storyContent">Your Story</label>
-            <textarea id="storyContent" name="story" rows="6" placeholder="Write your story here..." required></textarea>
+            <a href="#entertainment">Entertainment</a>
 
-            <button type="submit">Submit Story</button>
-        </form>
-    </section>
+            <a href="#sports">Sports</a>
 
-</main><section class="publisher-profile">
-    <h2>About the Publisher</h2>
+            <a href="#trending">Trending</a>
 
-    <h3>JessyGist</h3>
+            <a href="#submit-story">Submit a Story</a>
 
-    <p>
-        JessyGist is a digital news and entertainment platform bringing
-        readers interesting stories, trending topics, entertainment gist,
-        sports updates, and community news.
-    </p>
+        </nav>
 
-    <p>
-        Our goal is to provide useful, engaging, and responsible content
-        for our readers.
-    </p>
+    </header>
 
-    <p>
-        <strong>Publisher:</strong> JessyGist
-    </p>
 
-    <p>
-        <strong>Contact:</strong>
-        <a href="mailto:jessygist@gmail.com">jessygist@gmail.com</a>
-    </p>
-</section>
+    <!-- WELCOME SECTION -->
+    <main>
 
-<footer class="footer">
-    <p>&copy; <span id="year"></span> JessyGist. All rights reserved.</p>
-    <p>News, entertainment, sports, and trending stories.</p>
-</footer>
-    <script src="script.js"></script>
+        <section class="welcome-section" id="home">
+
+            <h2>Welcome to JessyGist</h2>
+
+            <p>
+                Stay updated with the latest Nigerian news,
+                celebrity gist, entertainment, sports, and
+                trending stories from around the world.
+            </p>
+
+            <a href="#latest-news" class="read-more">
+                Explore Latest Stories
+            </a>
+
+        </section>
+
+
+        <!-- LATEST NEWS -->
+        <section class="news-section" id="latest-news">
+
+            <h2>Latest News</h2>
+
+            <div class="news-grid">
+
+                <!-- STORY 1 -->
+                <article class="news-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=900&q=80"
+                        alt="Newspaper and current affairs"
+                        loading="lazy"
+                    >
+
+                    <div class="news-content">
+
+                        <span class="category">Latest News</span>
+
+                        <h3>Latest News and Important Updates</h3>
+
+                        <p>
+                            Stay informed about important developments,
+                            current affairs, and stories making headlines.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="read-more"
+                            data-story="latest"
+                        >
+                            Read More
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- STORY 2 -->
+                <article class="news-card" id="entertainment">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=900&q=80"
+                        alt="Cinema and entertainment"
+                        loading="lazy"
+                    >
+
+                    <div class="news-content">
+
+                        <span class="category">Entertainment</span>
+
+                        <h3>Entertainment News and Celebrity Gist</h3>
+
+                        <p>
+                            Discover entertainment updates, celebrity
+                            stories, Nollywood news, and movie discussions.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="read-more"
+                            data-story="entertainment"
+                        >
+                            Read More
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- STORY 3 -->
+                <article class="news-card" id="sports">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=900&q=80"
+                        alt="Athletes participating in sports"
+                        loading="lazy"
+                    >
+
+                    <div class="news-content">
+
+                        <span class="category">Sports</span>
+
+                        <h3>Sports Updates and Trending Stories</h3>
+
+                        <p>
+                            Follow sports news, football discussions,
+                            competitions, and notable sporting events.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="read-more"
+                            data-story="sports"
+                        >
+                            Read More
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- STORY 4 -->
+                <article class="news-card" id="trending">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=900&q=80"
+                        alt="News and trending topics"
+                        loading="lazy"
+                    >
+
+                    <div class="news-content">
+
+                        <span class="category">Trending</span>
+
+                        <h3>Trending Stories Making Headlines</h3>
+
+                        <p>
+                            Explore conversations, viral stories,
+                            and topics attracting public attention.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="read-more"
+                            data-story="trending"
+                        >
+                            Read More
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- STORY READER -->
+        <section
+            id="storyPage"
+            class="story-page"
+            hidden
+        >
+
+            <button
+                type="button"
+                id="backButton"
+            >
+                ← Back to News
+            </button>
+
+            <article id="storyDetails">
+
+                <h2 id="storyTitle"></h2>
+
+                <img
+                    id="storyImage"
+                    src=""
+                    alt=""
+                    hidden
+                >
+
+                <div id="storyContent"></div>
+
+            </article>
+
+        </section>
+
+
+        <!-- SEARCH RESULTS -->
+        <section id="searchSection" hidden>
+
+            <h2>Search Results</h2>
+
+            <p id="searchMessage" aria-live="polite"></p>
+
+            <div id="searchResults" class="news-grid"></div>
+
+        </section>
+
+
+        <!-- VISITOR SUBMISSIONS -->
+        <section
+            class="submit-section"
+            id="submit-story"
+        >
+
+            <h2>Submit Your Story</h2>
+
+            <p>
+                Have a news tip, entertainment story, or interesting
+                update to share? Send it to the JessyGist team for review.
+            </p>
+
+            <form
+                id="storyForm"
+                action="https://formspree.io/f/myekwalj"
+                method="POST"
+            >
+
+                <label for="visitorName">Your Name</label>
+
+                <input
+                    type="text"
+                    id="visitorName"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+
+                <label for="visitorEmail">Your Email</label>
+
+                <input
+                    type="email"
+                    id="visitorEmail"
+                    name="email"
+                    placeholder="Enter your email address"
+                    required
+                >
+
+
+                <label for="storyCategory">Story Category</label>
+
+                <select
+                    id="storyCategory"
+                    name="category"
+                    required
+                >
+
+                    <option value="">Select a category</option>
+
+                    <option value="News">News</option>
+
+                    <option value="Entertainment">Entertainment</option>
+
+                    <option value="Sports">Sports</option>
+
+                    <option value="Trending">Trending</option>
+
+                    <option value="Other">Other</option>
+
+                </select>
+
+
+                <label for="visitorStoryTitle">Story Title</label>
+
+                <input
+                    type="text"
+                    id="visitorStoryTitle"
+                    name="story_title"
+                    placeholder="Enter your story title"
+                    required
+                >
+
+
+                <label for="visitorStory">Your Story</label>
+
+                <textarea
+                    id="visitorStory"
+                    name="story"
+                    rows="7"
+                    placeholder="Write your story here..."
+                    required
+                ></textarea>
+
+
+                <button type="submit" id="submitStoryButton">
+                    Submit Story
+                </button>
+
+                <p id="formMessage" aria-live="polite"></p>
+
+                <input
+                    type="hidden"
+                    name="_subject"
+                    value="New Story Submission - JessyGist"
+                >
+
+            </form>
+
+            <p>
+                Please note: Submissions are reviewed before publication.
+                Sending a story does not guarantee that it will be published.
+            </p>
+
+        </section>
+
+
+        <!-- ABOUT JESSYGIST -->
+        <section class="about-section" id="about">
+
+            <h2>About JessyGist</h2>
+
+            <p>
+                JessyGist is an online news and entertainment platform
+                sharing Nigerian news, celebrity gist, entertainment,
+                sports, and trending stories.
+            </p>
+
+            <p>
+                Our goal is to keep readers informed and entertained
+                with interesting stories and updates.
+            </p>
+
+        </section>
+
+
+        <!-- CONTACT -->
+        <section class="contact-section" id="contact">
+
+            <h2>Contact JessyGist</h2>
+
+            <p>
+                For enquiries, corrections, and story submissions,
+                please use our Submit a Story form.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <p>
+            &copy; <span id="currentYear"></span> JessyGist.
+            All rights reserved.
+        </p>
+
+        <nav aria-label="Footer navigation">
+
+            <a href="./">Home</a>
+
+            <a href="#about">About Us</a>
+
+            <a href="#contact">Contact Us</a>
+
+            <a href="./privacy-policy.html">Privacy Policy</a>
+
+        </nav>
+
+        <p>
+            News, entertainment, sports, and trending stories.
+        </p>
+
+    </footer>
+
+
+    <!-- MAIN JAVASCRIPT -->
+    <script src="./script.js"></script>
+
+
+    <!-- CURRENT YEAR -->
     <script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function () {
-      navigator.serviceWorker.register("./sw.js")
-        .then(function () {
-          console.log("JessyGist service worker registered successfully.");
-        })
-        .catch(function (error) {
-          console.error("Service worker registration failed:", error);
-        });
-    });
-  }
-</script>
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+    </script>
+
+
+    <!-- SERVICE WORKER -->
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function () {
+                navigator.serviceWorker.register("./sw.js")
+                    .catch(function (error) {
+                        console.error(
+                            "Service worker registration failed:",
+                            error
+                        );
+                    });
+            });
+        }
+    </script>
+
 </body>
 </html>
-
