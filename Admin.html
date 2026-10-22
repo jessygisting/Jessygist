@@ -1,211 +1,367 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>JessyGist Admin Dashboard</title>
   <style>
-    * { box-sizing: border-box; }body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f2f5f9;
-  color: #243447;
-}
-
-header {
-  background: #102a43;
-  color: white;
-  padding: 22px 16px;
-  text-align: center;
-}
-
-header h1 {
-  margin: 0 0 8px;
-  color: #ffca28;
-}
-
-header p { margin: 0; }
-
-main {
-  width: min(900px, 94%);
-  margin: 25px auto;
-}
-
-.notice {
-  background: #fff4ce;
-  border-left: 5px solid #e0a800;
-  padding: 14px;
-  line-height: 1.6;
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-
-.panel {
-  background: white;
-  padding: 22px;
-  border-radius: 12px;
-  margin-bottom: 22px;
-  box-shadow: 0 3px 12px #102a4310;
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  margin: 16px 0 7px;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 7px;
-  font: inherit;
-}
-
-textarea {
-  min-height: 220px;
-  resize: vertical;
-  line-height: 1.6;
-}
-
-button {
-  border: 0;
-  border-radius: 7px;
-  padding: 12px 16px;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 8px 6px 0 0;
-}
-
-.primary { background: #1769aa; color: white; }
-.secondary { background: #e8eef5; color: #102a43; }
-
-#preview {
-  line-height: 1.8;
-  overflow-wrap: anywhere;
-}
-
-#preview img {
-  max-width: 100%;
-  border-radius: 8px;
-}
-
-.muted { color: #64748b; font-size: 14px; }
-
-footer {
-  text-align: center;
-  padding: 20px;
-  color: #64748b;
-}
-
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #f1f5f9;
+      color: #102a43;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 850px;
+      margin: auto;
+    }
+    header {
+      background: #102a43;
+      color: white;
+      padding: 22px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    header h1 { margin: 0 0 8px; }
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px #0000000d;
+    }
+    label {
+      display: block;
+      margin: 15px 0 7px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #bcccdc;
+      border-radius: 7px;
+      font: inherit;
+    }
+    textarea {
+      min-height: 180px;
+      resize: vertical;
+    }
+    button {
+      border: 0;
+      padding: 12px 17px;
+      border-radius: 7px;
+      background: #1769aa;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 10px 6px 0 0;
+    }
+    button:disabled { opacity: .6; }
+    .secondary { background: #526d82; }
+    .danger { background: #b42318; }
+    .status { padding: 12px; border-radius: 7px; background: #e6f6eb; }
+    .hidden { display: none; }
+    .article {
+      border: 1px solid #d9e2ec;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 12px;
+      overflow-wrap: anywhere;
+    }
+    .article h3 { margin-top: 0; }
+    small { color: #526d82; }
+    a { color: #1769aa; }
   </style>
 </head>
 <body>
+<div class="container">
   <header>
-    <h1>JessyGist</h1>
-    <p>Admin Dashboard · News & Entertainment</p>
-  </header>  <main>
-    <div class="notice">
-      <strong>Important:</strong> This is an initial dashboard prototype.
-      It does not yet publish articles to the live website or securely save
-      them online. Do not enter passwords or confidential information here.
-    </div><section class="panel">
-  <h2>Create an Article</h2>
+    <h1>JessyGist Admin</h1>
+    <p>Write, manage and publish your stories.</p>
+    <a href="./" style="color:white">← View JessyGist website</a>
+  </header>  <section class="card" id="loginCard">
+    <h2>Admin Sign In</h2>
+    <p>Sign in using the administrator account you created in Firebase.</p>
+    <form id="loginForm">
+      <label for="email">Email address</label>
+      <input id="email" type="email" autocomplete="username" required>
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+      <button id="loginButton" type="submit">Sign In</button>
+    </form>
+    <p id="loginMessage" role="status"></p>
+  </section>  <section class="card hidden" id="dashboard">
+    <p class="status">Signed in as <strong id="adminEmail"></strong></p>
+    <button id="logoutButton" class="secondary">Sign Out</button><h2>Write an Article</h2>
+<form id="articleForm">
+  <input id="articleId" type="hidden">
 
-  <form id="articleForm">
-    <label for="title">Article Headline</label>
-    <input id="title" type="text" maxlength="180"
-           placeholder="Enter your headline" required>
+  <label for="title">Article headline</label>
+  <input id="title" maxlength="180" required>
 
-    <label for="category">Category</label>
-    <select id="category" required>
-      <option value="Latest News">Latest News</option>
-      <option value="Entertainment">Entertainment</option>
-      <option value="Sports">Sports</option>
-      <option value="Trending">Trending</option>
-    </select>
+  <label for="category">Category</label>
+  <select id="category" required>
+    <option value="Latest News">Latest News</option>
+    <option value="Entertainment">Entertainment</option>
+    <option value="Sports">Sports</option>
+    <option value="Trending">Trending</option>
+  </select>
 
-    <label for="imageUrl">Image URL (optional)</label>
-    <input id="imageUrl" type="url"
-           placeholder="https://example.com/image.jpg">
+  <label for="imageUrl">Image URL (optional)</label>
+  <input id="imageUrl" type="url" placeholder="https://example.com/image.jpg">
 
-    <label for="story">Full Article</label>
-    <textarea id="story"
-              placeholder="Write your article here..."
-              required></textarea>
+  <label for="summary">Short summary</label>
+  <textarea id="summary" maxlength="500" style="min-height:90px"
+    placeholder="Write a short introduction..." required></textarea>
 
-    <button class="primary" type="submit">Preview Article</button>
-    <button class="secondary" type="reset">Clear Form</button>
-  </form>
-</section>
+  <label for="content">Full article</label>
+  <textarea id="content" placeholder="Write your full article here..." required></textarea>
 
-<section class="panel" id="previewPanel" hidden>
-  <h2>Article Preview</h2>
-  <p class="muted" id="previewCategory"></p>
-  <h3 id="previewTitle"></h3>
-  <img id="previewImage" alt="Article image" hidden>
-  <div id="preview"></div>
-  <button class="secondary" id="editButton" type="button">
-    Back to Editing
-  </button>
-</section>
+  <button id="draftButton" type="button" class="secondary">Save Draft</button>
+  <button id="publishButton" type="button">Publish Article</button>
+  <button id="cancelEditButton" type="button" class="secondary hidden">Cancel Edit</button>
+</form>
 
-<section class="panel">
-  <h2>Next Development Steps</h2>
-  <ul>
-    <li>Set up secure administrator authentication.</li>
-    <li>Connect an online database for saving articles.</li>
-    <li>Connect article publishing to the JessyGist homepage.</li>
-    <li>Add image uploads and article management.</li>
-  </ul>
-</section>
+<p id="articleMessage" role="status"></p>
 
-  </main>  <footer>
-    &copy; 2026 JessyGist. Admin prototype.
-  </footer>  <script>
-    const form = document.getElementById("articleForm");
-    const previewPanel = document.getElementById("previewPanel");
+<hr style="margin:28px 0;border:0;border-top:1px solid #d9e2ec">
 
-    form.addEventListener("submit", function(event) {
-      event.preventDefault();
+<h2>Manage Articles</h2>
+<p><small>Drafts and published articles appear here when the database rules permit access.</small></p>
+<button id="refreshButton" class="secondary">Refresh Articles</button>
+<div id="articleList"></div>
 
-      const title = document.getElementById("title").value.trim();
-      const category = document.getElementById("category").value;
-      const imageUrl = document.getElementById("imageUrl").value.trim();
-      const story = document.getElementById("story").value.trim();
+  </section>
+</div><script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+  import {
+    getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+  } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+  import {
+    getFirestore, collection, addDoc, getDocs, doc, updateDoc,
+    deleteDoc, serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
-      if (!title || !story) {
-        alert("Please enter a headline and the full article.");
-        return;
+  const firebaseConfig = {
+    apiKey: "AIzaSyD-NsGK8YI8uMC4tV4NUiKTw9weBTCkdqM",
+    authDomain: "jessygist.firebaseapp.com",
+    projectId: "jessygist",
+    storageBucket: "jessygist.firebasestorage.app",
+    messagingSenderId: "772170828125",
+    appId: "1:772170828125:web:81dc75e29905f84e0d40b4",
+    measurementId: "G-GQ1CWXWRDZ"
+  };
+
+  const ADMIN_UID = "Cj8plleazHdFSVprdYuFEVXpFjl1";
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const $ = id => document.getElementById(id);
+  const loginCard = $("loginCard");
+  const dashboard = $("dashboard");
+  let currentArticles = [];
+
+  function showMessage(id, message, isError = false) {
+    const el = $(id);
+    el.textContent = message;
+    el.style.color = isError ? "#b42318" : "#18753b";
+  }
+
+  function requireAdmin() {
+    if (!auth.currentUser || auth.currentUser.uid !== ADMIN_UID) {
+      throw new Error("This account is not authorised to manage JessyGist articles.");
+    }
+  }
+
+  $("loginForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    $("loginButton").disabled = true;
+    showMessage("loginMessage", "Signing in...");
+    try {
+      await signInWithEmailAndPassword(auth, $("email").value.trim(), $("password").value);
+      $("password").value = "";
+    } catch (error) {
+      showMessage("loginMessage", "Sign-in failed. Check your email and password, then try again.", true);
+    } finally {
+      $("loginButton").disabled = false;
+    }
+  });
+
+  $("logoutButton").addEventListener("click", async () => {
+    await signOut(auth);
+    $("password").value = "";
+  });
+
+  onAuthStateChanged(auth, async user => {
+    const isAdmin = !!user && user.uid === ADMIN_UID;
+    loginCard.classList.toggle("hidden", isAdmin);
+    dashboard.classList.toggle("hidden", !isAdmin);
+
+    if (user && !isAdmin) {
+      await signOut(auth);
+      showMessage("loginMessage", "This account is not authorised for the admin dashboard.", true);
+      return;
+    }
+
+    if (isAdmin) {
+      $("adminEmail").textContent = user.email || "Administrator";
+      await loadArticles();
+    }
+  });
+
+  function getArticleData(status) {
+    return {
+      title: $("title").value.trim(),
+      category: $("category").value,
+      imageUrl: $("imageUrl").value.trim(),
+      summary: $("summary").value.trim(),
+      content: $("content").value.trim(),
+      status,
+      updatedAt: serverTimestamp()
+    };
+  }
+
+  async function saveArticle(status) {
+    try {
+      requireAdmin();
+
+      if (!$("articleForm").reportValidity()) return;
+
+      const articleId = $("articleId").value;
+      const data = getArticleData(status);
+      if (!data.title || !data.summary || !data.content) {
+        throw new Error("Please complete the headline, summary and article.");
       }
 
-      document.getElementById("previewTitle").textContent = title;
-      document.getElementById("previewCategory").textContent = category;
-      document.getElementById("preview").textContent = story;
+      $("draftButton").disabled = true;
+      $("publishButton").disabled = true;
+      showMessage("articleMessage", "Saving article...");
 
-      const image = document.getElementById("previewImage");
-
-      if (imageUrl) {
-        image.src = imageUrl;
-        image.hidden = false;
-        image.onerror = function() {
-          image.hidden = true;
-          alert("The image could not be loaded. Please check the image URL.");
-        };
+      if (articleId) {
+        await updateDoc(doc(db, "articles", articleId), data);
       } else {
-        image.removeAttribute("src");
-        image.hidden = true;
+        await addDoc(collection(db, "articles"), {
+          ...data,
+          createdAt: serverTimestamp()
+        });
       }
 
-      previewPanel.hidden = false;
-      previewPanel.scrollIntoView({ behavior: "smooth" });
-    });
+      $("articleForm").reset();
+      $("articleId").value = "";
+      $("cancelEditButton").classList.add("hidden");
+      showMessage("articleMessage", status === "published"
+        ? "Article published in Firebase successfully."
+        : "Draft saved successfully.");
 
-    document.getElementById("editButton").addEventListener("click", function() {
-      previewPanel.hidden = true;
-      document.getElementById("title").focus();
+      await loadArticles();
+    } catch (error) {
+      showMessage("articleMessage", error.message || "Could not save article.", true);
+    } finally {
+      $("draftButton").disabled = false;
+      $("publishButton").disabled = false;
+    }
+  }
+
+  $("draftButton").addEventListener("click", () => saveArticle("draft"));
+  $("publishButton").addEventListener("click", () => saveArticle("published"));
+
+  $("cancelEditButton").addEventListener("click", () => {
+    $("articleForm").reset();
+    $("articleId").value = "";
+    $("cancelEditButton").classList.add("hidden");
+    showMessage("articleMessage", "Edit cancelled.");
+  });
+
+  async function loadArticles() {
+    try {
+      requireAdmin();
+      const snapshot = await getDocs(collection(db, "articles"));
+      currentArticles = snapshot.docs.map(item => ({ id: item.id, ...item.data() }));
+      currentArticles.sort((a, b) => {
+        const aTime = a.updatedAt?.seconds || 0;
+        const bTime = b.updatedAt?.seconds || 0;
+        return bTime - aTime;
+      });
+      renderArticles();
+    } catch (error) {
+      $("articleList").textContent = "Could not load articles. Check your Firebase connection and Firestore rules.";
+    }
+  }
+
+  function renderArticles() {
+    const list = $("articleList");
+    list.replaceChildren();
+
+    if (!currentArticles.length) {
+      list.textContent = "No articles yet. Write your first article above.";
+      return;
+    }
+
+    currentArticles.forEach(article => {
+      const card = document.createElement("div");
+      card.className = "article";
+
+      const heading = document.createElement("h3");
+      heading.textContent = article.title || "Untitled article";
+
+      const details = document.createElement("p");
+      details.textContent = `${article.category || ""} • ${article.status || "draft"}`;
+
+      const summary = document.createElement("p");
+      summary.textContent = article.summary || "";
+
+      const edit = document.createElement("button");
+      edit.textContent = "Edit";
+      edit.addEventListener("click", () => {
+        $("articleId").value = article.id;
+        $("title").value = article.title || "";
+        $("category").value = article.category || "Latest News";
+        $("imageUrl").value = article.imageUrl || "";
+        $("summary").value = article.summary || "";
+        $("content").value = article.content || "";
+        $("cancelEditButton").classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      const toggle = document.createElement("button");
+      toggle.className = "secondary";
+      toggle.textContent = article.status === "published" ? "Move to Draft" : "Publish";
+      toggle.addEventListener("click", async () => {
+        try {
+          requireAdmin();
+          await updateDoc(doc(db, "articles", article.id), {
+            status: article.status === "published" ? "draft" : "published",
+            updatedAt: serverTimestamp()
+          });
+          await loadArticles();
+        } catch (error) {
+          alert("Could not update this article. Please try again.");
+        }
+      });
+
+      const remove = document.createElement("button");
+      remove.className = "danger";
+      remove.textContent = "Delete";
+      remove.addEventListener("click", async () => {
+        if (!confirm("Delete this article permanently?")) return;
+        try {
+          requireAdmin();
+          await deleteDoc(doc(db, "articles", article.id));
+          await loadArticles();
+        } catch (error) {
+          alert("Could not delete this article. Please try again.");
+        }
+      });
+
+      card.append(heading, details, summary, edit, toggle, remove);
+      list.append(card);
     });
-  </script>
-</body>
-  </html>
+  }
+
+  $("refreshButton").addEventListener("click", loadArticles);
+</script></body>
+</html>
