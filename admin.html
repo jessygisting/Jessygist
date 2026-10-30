@@ -143,9 +143,13 @@
 </div><script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
   import {
-    getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
-  } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-  import {
+    import {
+  getAuth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     getFirestore, collection, addDoc, getDocs, doc, updateDoc,
     deleteDoc, serverTimestamp
   } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
@@ -192,9 +196,31 @@
     } catch (error) {
       showMessage("loginMessage", "Sign-in failed. Check your email and password, then try again.", true);
     } finally {
-      $("loginButton").disabled = false;
-    }
-  });
+$("loginButton").disabled = false;
+}
+});
+
+const forgotPasswordLink = $("forgotPassword");
+
+forgotPasswordLink.addEventListener("click", async event => {
+  event.preventDefault();
+
+  const email = $("email").value.trim();
+
+  if (!email) {
+    alert("Please enter your admin email address first.");
+    $("email").focus();
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert("Password reset email sent! Check your inbox and spam folder.");
+  } catch (error) {
+    console.error("Password reset error:", error);
+    alert("Could not send the reset email. Check your email address and Firebase Authentication settings.");
+   }
+});
 
   $("logoutButton").addEventListener("click", async () => {
     await signOut(auth);
