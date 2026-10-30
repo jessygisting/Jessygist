@@ -112,9 +112,9 @@ if (yearElement) {
 }
 /* LOAD PUBLISHED ARTICLES FROM FIREBASE */
 
-(async function loadFirebaseArticles() {
+(async function loadFirebaseArticles()alert("JessyGist Firebase function started!"); {
   try {
-    const { initializeApp, getApps, getApp } =
+      const { initializeApp, getApps, getApp } =
       await import("https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js");
 
     const {
