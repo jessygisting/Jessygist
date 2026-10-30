@@ -147,6 +147,7 @@ if (yearElement) {
 
     const snapshot = await getDocs(articlesQuery);
       console.log("JessyGist Firebase articles found:", snapshot.size);
+alert("JessyGist connected! Published articles found: " + snapshot.size);
 
     const newsGrid =
       document.querySelector(".news-grid") ||
@@ -248,6 +249,5 @@ if (yearElement) {
     );
 
   } catch (error) {
-    console.error("JessyGist Firebase article loading error:", error);
-  }
-})();
+  console.error("JessyGist Firebase article loading error:", error);
+}
