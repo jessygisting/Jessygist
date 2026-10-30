@@ -1,3 +1,4 @@
+console.log("JessyGist script.js is running!");
 document.addEventListener("DOMContentLoaded", function () {
 const searchInput = document.getElementById("searchInput");
 const newsCards = document.querySelectorAll(".news-card");
@@ -170,7 +171,6 @@ alert("JessyGist connected! Published articles found: " + snapshot.size);
         image.loading = "lazy";
         card.appendChild(image);
       }
-
       const content = document.createElement("div");
       content.className = "news-content";
 
@@ -247,6 +247,11 @@ alert("JessyGist connected! Published articles found: " + snapshot.size);
       "JessyGist: Loaded " + snapshot.size + " published article(s)."
     );
 
-  } catch (error) {
+  catch (error) {
   console.error("JessyGist Firebase article loading error:", error);
-}
+
+  alert(
+    "JessyGist could not load articles.\n\n" +
+    "Error: " + error.message
+  );
+  }
