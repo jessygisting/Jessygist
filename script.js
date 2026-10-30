@@ -141,9 +141,8 @@ if (yearElement) {
     const db = getFirestore(app);
 
     const articlesQuery = query(
-      collection(db, "articles"),
-      where("status", "==", "published")
-    );
+  collection(db, "articles")
+);
 
     const snapshot = await getDocs(articlesQuery);
       console.log("JessyGist Firebase articles found:", snapshot.size);
