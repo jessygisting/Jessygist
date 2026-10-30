@@ -139,13 +139,15 @@ if (yearElement) {
             "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js"
         );
 
-        const {
-            getFirestore,
-            collection,
-            getDocs
-        } = await import(
-            "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js"
-        );
+    const {
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    where
+} = await import(
+    "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js"
+);
 
         const firebaseConfig = {
             apiKey: "AIzaSyA-AFHmu2oQVPW2fegLtMo8MCIQvSAD_Ow",
@@ -163,9 +165,12 @@ if (yearElement) {
 
         const db = getFirestore(app);
 
-        const snapshot = await getDocs(
-            collection(db, "articles")
-        );
+        const articlesQuery = query(
+    collection(db, "articles"),
+    where("status", "==", "published")
+);
+
+const snapshot = await getDocs(articlesQuery);
 
         console.log(
             "JessyGist Firebase articles found:",
