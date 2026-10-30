@@ -146,6 +146,7 @@ if (yearElement) {
     );
 
     const snapshot = await getDocs(articlesQuery);
+      console.log("JessyGist Firebase articles found:", snapshot.size);
 
     const newsGrid =
       document.querySelector(".news-grid") ||
