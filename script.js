@@ -60,7 +60,6 @@ const searchText = searchInput.value.toLowerCase().trim();
 });
 
 }
-
 // OPEN A STORY
 document.querySelectorAll(".read-more").forEach(function (button) {
     button.addEventListener("click", function () {
@@ -72,37 +71,54 @@ document.querySelectorAll(".read-more").forEach(function (button) {
             return;
         }
 
-        storyDetails.innerHTML = `
-            <span class="category">${story.category}</span>
-            <h2>${story.title}</h2>
-            <img src="${story.image}" alt="${story.category}">
-            ${story.paragraphs.map(function (paragraph) {
-                return `<p>${paragraph}</p>`;
-            }).join("")}
-        `;
+        storyDetails.replaceChildren();
 
-        newsSection.hidden = true;
-        searchSection.hidden = true;
-        welcomeSection.hidden = true;
-        submitSection.hidden = true;
-        storyPage.hidden = false;
+        const category = document.createElement("span");
+        category.className = "category";
+        category.textContent = story.category || "News";
+        storyDetails.appendChild(category);
+
+        const title = document.createElement("h2");
+        title.textContent = story.title || "Untitled story";
+        storyDetails.appendChild(title);
+
+        if (story.image) {
+            const image = document.createElement("img");
+            image.src = story.image;
+            image.alt = story.title || "News";
+            storyDetails.appendChild(image);
+        }
+
+        (story.paragraphs || []).forEach(function (paragraphText) {
+            const paragraph = document.createElement("p");
+            paragraph.textContent = paragraphText;
+            storyDetails.appendChild(paragraph);
+        });
+
+        if (newsSection) newsSection.hidden = true;
+        if (searchSection) searchSection.hidden = true;
+        if (welcomeSection) welcomeSection.hidden = true;
+        if (submitSection) submitSection.hidden = true;
+        if (storyPage) storyPage.hidden = false;
 
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
 });
 
+
 // RETURN TO THE MAIN APP
 if (backButton) {
     backButton.addEventListener("click", function () {
-        storyPage.hidden = true;
-        newsSection.hidden = false;
-        searchSection.hidden = false;
-        welcomeSection.hidden = false;
-        submitSection.hidden = false;
+        if (storyPage) storyPage.hidden = true;
+        if (newsSection) newsSection.hidden = false;
+        if (searchSection) searchSection.hidden = false;
+        if (welcomeSection) welcomeSection.hidden = false;
+        if (submitSection) submitSection.hidden = false;
 
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
 }
+
 
 // SHOW THE CURRENT YEAR
 const yearElement = document.getElementById("year");
@@ -110,148 +126,162 @@ const yearElement = document.getElementById("year");
 if (yearElement) {
     yearElement.textContent = new Date().getFullYear();
 }
-/* LOAD PUBLISHED ARTICLES FROM FIREBASE */
 
-(async function loadFirebaseArticles()alert("JessyGist Firebase function started!"); {
-  try {
-      const { initializeApp, getApps, getApp } =
-      await import("https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js");
 
-    const {
-      getFirestore,
-      collection,
-      getDocs,
-      query,
-      where
-    } = await import("https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js");
+// LOAD ARTICLES FROM FIREBASE
+(async function loadFirebaseArticles() {
+    try {
+        const {
+            initializeApp,
+            getApps,
+            getApp
+        } = await import(
+            "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js"
+        );
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyA-AFHmu2oQVPW2fegLtMo8MCIQvSAD_Ow",
-      authDomain: "jessygist-web.firebaseapp.com",
-      projectId: "jessygist-web",
-      storageBucket: "jessygist-web.firebasestorage.app",
-      messagingSenderId: "525204408186",
-      appId: "1:525204408186:web:1258ae725d2987346878c3",
-      measurementId: "G-5MKSXMHBYL"
-    };
+        const {
+            getFirestore,
+            collection,
+            getDocs
+        } = await import(
+            "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js"
+        );
 
-    const app = getApps().length
-      ? getApp()
-      : initializeApp(firebaseConfig);
+        const firebaseConfig = {
+            apiKey: "AIzaSyA-AFHmu2oQVPW2fegLtMo8MCIQvSAD_Ow",
+            authDomain: "jessygist-web.firebaseapp.com",
+            projectId: "jessygist-web",
+            storageBucket: "jessygist-web.firebasestorage.app",
+            messagingSenderId: "525204408186",
+            appId: "1:525204408186:web:1258ae725d2987346878c3",
+            measurementId: "G-5MKSXMHBYL"
+        };
 
-    const db = getFirestore(app);
+        const app = getApps().length
+            ? getApp()
+            : initializeApp(firebaseConfig);
 
-    const articlesQuery = query(
-  collection(db, "articles")
-);
+        const db = getFirestore(app);
 
-    const snapshot = await getDocs(articlesQuery);
-      console.log("JessyGist Firebase articles found:", snapshot.size);
-alert("JessyGist connected! Published articles found: " + snapshot.size);
+        const snapshot = await getDocs(
+            collection(db, "articles")
+        );
 
-    const newsGrid =
-      document.querySelector(".news-grid") ||
-      document.getElementById("newsGrid");
+        console.log(
+            "JessyGist Firebase articles found:",
+            snapshot.size
+        );
 
-    if (!newsGrid) {
-      console.error("JessyGist news container was not found.");
-      return;
-    }
+        const newsGrid =
+            document.querySelector(".news-grid") ||
+            document.getElementById("newsGrid");
 
-    snapshot.forEach(function (documentSnapshot) {
-      const article = documentSnapshot.data();
-
-      const card = document.createElement("article");
-      card.className = "news-card";
-
-      if (article.imageUrl) {
-        const image = document.createElement("img");
-        image.src = article.imageUrl;
-        image.alt = article.title || "News";
-        image.loading = "lazy";
-        card.appendChild(image);
-      }
-      const content = document.createElement("div");
-      content.className = "news-content";
-
-      const category = document.createElement("span");
-      category.className = "category";
-      category.textContent = article.category || "News";
-
-      const title = document.createElement("h3");
-      title.textContent = article.title || "Untitled story";
-
-      const summary = document.createElement("p");
-      summary.textContent = article.summary || "";
-
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "read-more";
-      button.textContent = "Read More";
-
-      button.addEventListener("click", function () {
-        const storyPage = document.getElementById("storyPage");
-        const storyDetails = document.getElementById("storyDetails");
-
-        if (!storyPage || !storyDetails) {
-          alert("The story reader could not be found.");
-          return;
+        if (!newsGrid) {
+            throw new Error(
+                "The news container was not found in index.html."
+            );
         }
 
-        storyDetails.replaceChildren();
+        snapshot.forEach(function (documentSnapshot) {
+            const article = documentSnapshot.data();
 
-        const storyCategory = document.createElement("span");
-        storyCategory.className = "category";
-        storyCategory.textContent = article.category || "News";
+            // Create the article card.
+            const card = document.createElement("article");
+            card.className = "news-card";
 
-        const storyTitle = document.createElement("h2");
-        storyTitle.textContent = article.title || "Untitled story";
+            if (article.imageUrl) {
+                const image = document.createElement("img");
+                image.src = article.imageUrl;
+                image.alt = article.title || "News";
+                image.loading = "lazy";
+                card.appendChild(image);
+            }
 
-        storyDetails.appendChild(storyCategory);
-        storyDetails.appendChild(storyTitle);
+            const content = document.createElement("div");
+            content.className = "news-content";
 
-        if (article.imageUrl) {
-          const storyImage = document.createElement("img");
-          storyImage.src = article.imageUrl;
-          storyImage.alt = article.title || "News";
-          storyDetails.appendChild(storyImage);
-        }
+            const category = document.createElement("span");
+            category.className = "category";
+            category.textContent = article.category || "News";
 
-        const paragraph = document.createElement("p");
-        paragraph.textContent = article.content || article.summary || "";
-        storyDetails.appendChild(paragraph);
+            const title = document.createElement("h3");
+            title.textContent = article.title || "Untitled story";
 
-        document.querySelectorAll(
-          ".news-section, .search-section, .welcome-section"
-        ).forEach(function (section) {
-          section.hidden = true;
+            const summary = document.createElement("p");
+            summary.textContent = article.summary || "";
+
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "read-more";
+            button.textContent = "Read More";
+
+            // Open a Firebase article.
+            button.addEventListener("click", function () {
+                if (!storyPage || !storyDetails) {
+                    alert("The story reader could not be found.");
+                    return;
+                }
+
+                storyDetails.replaceChildren();
+
+                const storyCategory = document.createElement("span");
+                storyCategory.className = "category";
+                storyCategory.textContent = article.category || "News";
+                storyDetails.appendChild(storyCategory);
+
+                const storyTitle = document.createElement("h2");
+                storyTitle.textContent = article.title || "Untitled story";
+                storyDetails.appendChild(storyTitle);
+
+                if (article.imageUrl) {
+                    const storyImage = document.createElement("img");
+                    storyImage.src = article.imageUrl;
+                    storyImage.alt = article.title || "News";
+                    storyDetails.appendChild(storyImage);
+                }
+
+                const paragraph = document.createElement("p");
+                paragraph.textContent =
+                    article.content || article.summary || "";
+                storyDetails.appendChild(paragraph);
+
+                if (newsSection) newsSection.hidden = true;
+                if (searchSection) searchSection.hidden = true;
+                if (welcomeSection) welcomeSection.hidden = true;
+                if (submitSection) submitSection.hidden = true;
+
+                storyPage.hidden = false;
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+
+            content.appendChild(category);
+            content.appendChild(title);
+            content.appendChild(summary);
+            content.appendChild(button);
+
+            card.appendChild(content);
+            newsGrid.appendChild(card);
         });
 
-        const submitSection = document.getElementById("submit");
-        if (submitSection) submitSection.hidden = true;
+        console.log(
+            "JessyGist loaded " + snapshot.size + " Firebase article(s)."
+        );
 
-        storyPage.hidden = false;
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
+    } catch (error) {
+        console.error(
+            "JessyGist Firebase article loading error:",
+            error
+        );
 
-      content.appendChild(category);
-      content.appendChild(title);
-      content.appendChild(summary);
-      content.appendChild(button);
-      card.appendChild(content);
+        alert(
+            "JessyGist could not load articles.\n\n" +
+            "Error: " + error.message
+        );
+    }
+})();
 
-      newsGrid.appendChild(card);
-    });
-
-    console.log(
-      "JessyGist: Loaded " + snapshot.size + " published article(s)."
-    );
-
-  catch (error) {
-  console.error("JessyGist Firebase article loading error:", error);
-
-  alert(
-    "JessyGist could not load articles.\n\n" +
-    "Error: " + error.message
-  );
-  }
+});
