@@ -194,9 +194,12 @@
       await signInWithEmailAndPassword(auth, $("email").value.trim(), $("password").value);
       $("password").value = "";
     } catch (error) {
-  console.error("JessyGist login error:", error.code, error.message);
-  showMessage("loginMessage", "Login failed: " + error.code, true);
-    }
+console.error("JessyGist login error:", error.code, error.message);
+showMessage("loginMessage", "Login failed: " + error.code, true);
+} finally {
+$("loginButton").disabled = false;
+}
+});
 
 const forgotPasswordLink = $("forgotPassword");
 
