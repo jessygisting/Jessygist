@@ -12,10 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const welcomeSection = document.querySelector(".welcome");
     const submitSection = document.getElementById("submit");
 
-    let currentArticle = null;
-    let currentShareUrl = window.location.href;
+let currentArticle = null;
+let currentArticleId = null;
+let currentShareUrl = window.location.href;
+let firestoreDb = null;
+let replyingTo = null;
 
-    const firebaseArticles = new Map();
+const firebaseArticles = new Map();
 
     // SHOW MAIN PAGE
     function showMainPage() {
