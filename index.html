@@ -249,35 +249,93 @@
 
 
         <!-- STORY READER -->
-        <section
-            id="storyPage"
-            class="story-page"
+<section
+    id="storyPage"
+    class="story-page"
+    hidden
+>
+
+    <button
+        type="button"
+        id="backButton"
+    >
+        ← Back to News
+    </button>
+
+    <article id="storyDetails">
+
+        <h2 id="storyTitle"></h2>
+
+        <img
+            id="storyImage"
+            src=""
+            alt=""
             hidden
         >
 
-            <button
-                type="button"
-                id="backButton"
+        <div id="storyContent"></div>
+
+    </article>
+
+    <!-- COMMENTS SECTION -->
+    <section id="commentsSection" class="comments-section">
+
+        <h2>Join the Conversation</h2>
+
+        <p>
+            Share your thoughts about this article.
+            Keep your comments respectful.
+        </p>
+
+        <div class="comment-count">
+            Comments (<span id="commentCount">0</span>)
+        </div>
+
+        <!-- COMMENT FORM -->
+        <form id="commentForm">
+
+            <label for="commentName">Your Name</label>
+
+            <input
+                type="text"
+                id="commentName"
+                maxlength="40"
+                placeholder="Enter your name"
+                required
             >
-                ← Back to News
+
+            <label for="commentText">Your Comment</label>
+
+            <textarea
+                id="commentText"
+                maxlength="1000"
+                rows="5"
+                placeholder="Write your comment here..."
+                required
+            ></textarea>
+
+            <button type="submit" id="submitComment">
+                Post Comment
             </button>
 
-            <article id="storyDetails">
+            <p
+                id="commentMessage"
+                role="status"
+                aria-live="polite"
+            ></p>
 
-                <h2 id="storyTitle"></h2>
+        </form>
 
-                <img
-                    id="storyImage"
-                    src=""
-                    alt=""
-                    hidden
-                >
+        <!-- COMMENTS DISPLAY -->
+        <div id="commentsList">
 
-                <div id="storyContent"></div>
+            <p>Comments will appear here.</p>
 
-            </article>
+        </div>
 
-        </section>
+    </section>
+
+</section>
 
 
         <!-- SEARCH RESULTS -->
