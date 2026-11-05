@@ -432,7 +432,8 @@ const firebaseArticles = new Map();
                 ? getApp()
                 : initializeApp(firebaseConfig);
 
-            const db = getFirestore(app);
+            firestoreDb = getFirestore(app);
+const db = firestoreDb;
 
             const articlesQuery = query(
                 collection(db, "articles"),
