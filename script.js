@@ -408,15 +408,17 @@ const firebaseArticles = new Map();
                 "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js"
             );
 
-            const {
-                getFirestore,
-                collection,
-                getDocs,
-                query,
-                where
-            } = await import(
-                "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js"
-            );
+    const {
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    where,
+    addDoc,
+    serverTimestamp
+} = await import(
+    "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js"
+);
 
             const firebaseConfig = {
                 apiKey: "AIzaSyA-AFHmu2oQVP2WfegLtMo8MCIQvSAD_Ow",
