@@ -147,7 +147,7 @@ const firebaseArticles = new Map();
 
                 copyButton.textContent = "Copied!";
 
-                setTimeout(function () {
+                setTimeout(function b {
                     copyButton.textContent = "Copy Article Link";
                 }, 2000);
 
@@ -173,6 +173,8 @@ const firebaseArticles = new Map();
         }
 
         currentArticle = article;
+        currentArticleId = articleId || null;
+replyingTo = null;
 
         const titleText = article.title || "Untitled story";
 
