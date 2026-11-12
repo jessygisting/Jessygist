@@ -1015,55 +1015,95 @@ async function loadArticles(){
 
         if(imageUrl.startsWith("https://")){
 
-            const img = document.createElement("img");
+    $("articleImagePreview").src = imageUrl;
 
-            img.src = imageUrl;
+    $("articleImagePreview").classList.remove("hidden");
 
-            img.alt = "Article image";
+}else{
 
-            img.loading = "lazy";
+    $("articleImagePreview").classList.add("hidden");
 
-            card.append(img);
-
-        }
-
-
-        /* EDIT BUTTON */
-
-        const edit = document.createElement("button");
-
-        edit.type = "button";
-
-        edit.textContent = "Edit";
-
-        edit.addEventListener("click",()=>{
-
-            $("articleId").value = article.id;
-
-            $("title").value = article.title || "";
-
-            $("category").value = article.category || "Latest News";
-
-            $("summary").value = article.summary || "";
-
-            $("content").value = article.content || "";
-
-            $("imageUrl").value = imageUrl;
-
-            $("status").value = article.status || "draft";
-
-            $("editorHeading").textContent = "Edit Article";
-
-            $("saveButton").textContent = "Update Article";
-
-            if(imageUrl.startsWith("https://")){
-
-                $("articleImagePreview").src = imageUrl;
-
-                $("articleImagePreview").classList.add("hidden");
-$("articleImagePreview").removeAttribute("src");
+    $("articleImagePreview").removeAttribute("src");
 
 }
+
+});
+
+
+card.append(edit);
+
+
+/* DELETE BUTTON */
+
+const deleteButton = document.createElement("button");
+
+deleteButton.type = "button";
+
+deleteButton.textContent = "Delete";
+
+deleteButton.className = "danger";
+
+deleteButton.addEventListener("click",async()=>{
+
+    if(!confirm("Are you sure you want to delete this article?")){
+        return;
+    }
+
+    try{
+
+        requireAdmin();
+
+        await deleteDoc(
+            doc(db,"articles",article.id)
+        );
+
+        message("listMessage","Article deleted successfully.");
+
+        await loadArticles();
+
+    }catch(error){
+
+        console.error(error);
+
+        message(
+            "listMessage",
+            "Delete failed: " + (error.message || "Unknown error")
+        );
+
+    }
+
+});
+
+card.append(deleteButton);
+
+list.append(card);
+
+}
+
+}
+
+
+/* REFRESH ARTICLES */
+
+$("refreshButton").addEventListener("click",async()=>{
+
+    try{
+
+        requireAdmin();
+
+        await loadArticles();
+
+    }catch(error){
+
+        console.error(error);
+
+        message(
+            "listMessage",
+            "Could not refresh articles: " + error.message
+        );
+
+    }
+
 });
 
 </script>
