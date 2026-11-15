@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /JessyGist/
+
+Sitemap: https://jessygisting.github.io/JessyGist/sitemap.xml
