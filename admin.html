@@ -543,16 +543,21 @@ serverTimestamp
 
 /* FIREBASE CONFIGURATION */
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase Configuration
 const firebaseConfig = {
-apiKey: "AIzaSyA-AFHmu2oQVPW2fegLtMo8MCIQvSAD_Ow",
-authDomain: "jessygist-web.firebaseapp.com",
-projectId: "jessygist-web",
-storageBucket: "jessygist-web.firebasestorage.app",
-messagingSenderId: "525204408186",
-appId: "1:525204408186:web:1258ae725d2987346878c3",
-measurementId: "G-5MKSXMHBYL"
+    apiKey: "AIzaSyA-AFHmu2oQVPW2fegLtMo8MCIQvSAD_Ow",
+    authDomain: "jessygist-web.firebaseapp.com",
+    projectId: "jessygist-web",
+    storageBucket: "jessygist-web.firebasestorage.app",
+    messagingSenderId: "525204408186",
+    appId: "1:525204408186:web:1258ae725d2987346878c3",
+    measurementId: "G-5MKSXMHBYL"
 };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 };
 
