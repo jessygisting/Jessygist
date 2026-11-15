@@ -1,4 +1,8 @@
 User-agent: *
-Allow: /JessyGist/
+Allow: /
 
 Sitemap: https://jessygisting.github.io/JessyGist/sitemap.xml
+
+
+
+
