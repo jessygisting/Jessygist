@@ -1,27 +1,34 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#102a43">
 
 <title>JessyGist Admin Dashboard</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
     padding:16px;
     background:#f1f5f9;
     color:#102a43;
-    font-family:Arial,sans-serif
+    font-family:Arial,sans-serif;
 }
 
 .container{
     max-width:900px;
-    margin:auto
+    margin:auto;
 }
 
 header{
@@ -29,22 +36,25 @@ header{
     color:white;
     padding:22px;
     border-radius:12px;
-    margin-bottom:20p
+    margin-bottom:20px;
+}
 
-header a{color:white}
+header a{
+    color:white;
+}
 
 .card{
     background:white;
     padding:20px;
     border-radius:12px;
     margin-bottom:20px;
-    box-shadow:0 2px 8px #0000000d
+    box-shadow:0 2px 8px #0000000d;
 }
 
 label{
     display:block;
     margin:15px 0 7px;
-    font-weight:bold
+    font-weight:bold;
 }
 
 input,select,textarea{
@@ -53,12 +63,12 @@ input,select,textarea{
     padding:12px;
     border:1px solid #bcccdc;
     border-radius:7px;
-    font:inherit
+    font:inherit;
 }
 
 textarea{
     min-height:160px;
-    resize:vertical
+    resize:vertical;
 }
 
 button{
@@ -69,30 +79,41 @@ button{
     color:white;
     font-weight:bold;
     cursor:pointer;
-    margin:10px 6px 0 0
+    margin:10px 6px 0 0;
 }
 
 button:disabled{
     opacity:.6;
-    cursor:wait
+    cursor:wait;
 }
 
-.secondary{background:#526d82}
-.danger{background:#b42318}
+.secondary{
+    background:#526d82;
+}
 
-.hidden{display:none!important}
+.danger{
+    background:#b42318;
+}
+
+.success{
+    background:#16803c;
+}
+
+.hidden{
+    display:none!important;
+}
 
 .message{
     margin-top:12px;
     overflow-wrap:anywhere;
-    line-height:1.5
+    line-height:1.5;
 }
 
 .status{
     padding:12px;
     border-radius:7px;
     background:#e6f6eb;
-    overflow-wrap:anywhere
+    overflow-wrap:anywhere;
 }
 
 .article{
@@ -100,7 +121,7 @@ button:disabled{
     padding:15px;
     border-radius:8px;
     margin-top:12px;
-    overflow-wrap:anywhere
+    overflow-wrap:anywhere;
 }
 
 .article img,.preview{
@@ -109,29 +130,44 @@ button:disabled{
     max-height:240px;
     object-fit:contain;
     margin-top:12px;
-    border-radius:8px
+    border-radius:8px;
 }
 
-.muted{color:#526d82}
+.muted{
+    color:#526d82;
+}
 
 .notice{
     background:#fff7e0;
     padding:12px;
     border-radius:7px;
-    line-height:1.5
+    line-height:1.5;
 }
 
 .row{
     display:flex;
     gap:10px;
-    flex-wrap:wrap
+    flex-wrap:wrap;
 }
 
 .row>*{
     flex:1;
-    min-width:120px
+    min-width:120px;
 }
+
+.article-actions{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.article-actions button{
+    flex:1;
+    min-width:100px;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -139,55 +175,101 @@ button:disabled{
 <div class="container">
 
 <header>
+
 <h1>JessyGist Admin</h1>
+
 <p>Write, manage and publish your stories.</p>
+
 <a href="./">← View JessyGist website</a>
+
 </header>
+
+
+<!-- LOGIN -->
 
 <section class="card" id="loginCard">
 
 <h2>Admin Sign In</h2>
 
-    
 <p>Sign in using your Firebase administrator account.</p>
 
 <form id="loginForm">
 
 <label for="email">Email address</label>
-<input id="email" type="email" autocomplete="username" required>
+
+<input
+id="email"
+type="email"
+autocomplete="username"
+required
+>
 
 <label for="password">Password</label>
-<input id="password" type="password" autocomplete="current-password" required>
 
-<button id="loginButton" type="submit">Sign In</button>
+<input
+id="password"
+type="password"
+autocomplete="current-password"
+required
+>
 
-<button id="forgotPassword" type="button" class="secondary">
+<button id="loginButton" type="submit">
+Sign In
+</button>
+
+<button
+id="forgotPassword"
+type="button"
+class="secondary"
+>
 Forgot Password?
 </button>
 
 </form>
 
-<p id="loginMessage" class="message" role="status" aria-live="polite">
-Checking sign-in status…
+<p
+id="loginMessage"
+class="message"
+role="status"
+aria-live="polite"
+>
+Connecting to Firebase...
 </p>
 
 </section>
 
+
+<!-- DASHBOARD -->
+
 <main id="dashboard" class="hidden">
+
+
+<!-- ADMIN ACCOUNT -->
 
 <section class="card">
 
 <h2>Administrator</h2>
 
 <p class="status">
-Signed in as <strong id="adminEmail"></strong>
+
+Signed in as:
+
+<strong id="adminEmail"></strong>
+
 </p>
 
-<button id="logoutButton" class="secondary" type="button">
+<button
+id="logoutButton"
+class="secondary"
+type="button"
+>
 Sign Out
 </button>
 
 </section>
+
+
+<!-- IMAGE UPLOAD -->
 
 <section class="card">
 
@@ -196,40 +278,74 @@ Sign Out
 <p>Choose an image from your phone and upload it.</p>
 
 <label for="imageFile">
-Choose image (JPG, PNG, or WebP; maximum 5 MB)
+
+Choose image (JPG, PNG, WebP; maximum 5 MB)
+
 </label>
 
-<input id="imageFile" type="file"
-accept="image/jpeg,image/png,image/webp">
+<input
+id="imageFile"
+type="file"
+accept="image/jpeg,image/png,image/webp"
+>
 
-<img id="uploadPreview" class="preview hidden"
-alt="Selected image preview">
+<img
+id="uploadPreview"
+class="preview hidden"
+alt="Selected image preview"
+>
 
-<button id="uploadButton" type="button">
+<button
+id="uploadButton"
+type="button"
+>
 Upload Image
 </button>
 
-<p id="uploadMessage" class="message" role="status" aria-live="polite"></p>
+<p
+id="uploadMessage"
+class="message"
+role="status"
+aria-live="polite"
+></p>
 
-<label for="uploadedImageUrl">Uploaded image URL</label>
+<label for="uploadedImageUrl">
+Uploaded image URL
+</label>
 
-<input id="uploadedImageUrl" type="url"
-readonly placeholder="Uploaded URL will appear here">
+<input
+id="uploadedImageUrl"
+type="url"
+readonly
+placeholder="Uploaded URL will appear here"
+>
 
-<button id="copyImageUrl" type="button" class="secondary">
+<button
+id="copyImageUrl"
+type="button"
+class="secondary"
+>
 Copy Image URL
 </button>
 
-<button id="useImage" type="button">
+<button
+id="useImage"
+type="button"
+>
 Use Image in Article
 </button>
 
 <p class="notice">
-Security note: Protect Firestore with proper security rules.
+
+Security note: Keep Firestore security rules enabled.
 Never place a Cloudinary API secret in website code.
+
 </p>
 
 </section>
+
+
+<!-- ARTICLE EDITOR -->
 
 <section class="card">
 
@@ -237,54 +353,117 @@ Never place a Cloudinary API secret in website code.
 
 <form id="articleForm">
 
-<input id="articleId" type="hidden">
+<input
+id="articleId"
+type="hidden"
+>
 
-<label for="title">Article headline</label>
-<input id="title" maxlength="180" required>
+<label for="title">
+Article headline
+</label>
 
-<label for="category">Category</label>
+<input
+id="title"
+maxlength="180"
+required
+>
+
+<label for="category">
+Category
+</label>
 
 <select id="category" required>
-<option value="Latest News">Latest News</option>
-<option value="Entertainment">Entertainment</option>
-<option value="Sports">Sports</option>
-<option value="Trending">Trending</option>
+
+<option value="Latest News">
+Latest News
+</option>
+
+<option value="Entertainment">
+Entertainment
+</option>
+
+<option value="Sports">
+Sports
+</option>
+
+<option value="Trending">
+Trending
+</option>
+
 </select>
 
-<label for="summary">Short description</label>
 
-<textarea id="summary" maxlength="500"
+<label for="summary">
+Short description
+</label>
+
+<textarea
+id="summary"
+maxlength="500"
 style="min-height:90px"
-placeholder="Write a short summary"></textarea>
+placeholder="Write a short summary"
+></textarea>
 
-<label for="content">Article content</label>
 
-<textarea id="content" required
-placeholder="Write your full article here"></textarea>
+<label for="content">
+Article content
+</label>
 
-<label for="imageUrl">Featured image URL</label>
+<textarea
+id="content"
+required
+placeholder="Write your full article here"
+></textarea>
 
-<input id="imageUrl" type="url"
-placeholder="https://...">
 
-<img id="articleImagePreview"
+<label for="imageUrl">
+Featured image URL
+</label>
+
+<input
+id="imageUrl"
+type="url"
+placeholder="https://..."
+>
+
+<img
+id="articleImagePreview"
 class="preview hidden"
-alt="Featured image preview">
+alt="Featured image preview"
+>
 
-<label for="status">Article status</label>
+
+<label for="status">
+Article status
+</label>
 
 <select id="status">
-<option value="draft">Save as Draft</option>
-<option value="published">Publish Article</option>
+
+<option value="draft">
+Save as Draft
+</option>
+
+<option value="published">
+Publish Article
+</option>
+
 </select>
+
 
 <div class="row">
 
-<button id="saveButton" type="submit">
+<button
+id="saveButton"
+type="submit"
+>
 Save Article
 </button>
 
-<button id="clearButton" type="button" class="secondary">
+<button
+id="clearButton"
+type="button"
+class="secondary"
+>
 Clear Form
 </button>
 
@@ -292,36 +471,54 @@ Clear Form
 
 </form>
 
-<p id="articleMessage" class="message"
-role="status" aria-live="polite"></p>
+<p
+id="articleMessage"
+class="message"
+role="status"
+aria-live="polite"
+></p>
 
 </section>
+
+
+<!-- ARTICLE MANAGEMENT -->
 
 <section class="card">
 
 <h2>Manage Articles</h2>
 
-<button id="refreshButton" type="button" class="secondary">
+<button
+id="refreshButton"
+type="button"
+class="secondary"
+>
 Refresh Articles
 </button>
 
-<p id="listMessage" class="message"
-role="status" aria-live="polite"></p>
+<p
+id="listMessage"
+class="message"
+role="status"
+aria-live="polite"
+></p>
 
 <div id="articleList"></div>
 
 </section>
 
 </main>
+
 </div>
 
+
+<!-- FIREBASE JAVASCRIPT -->
+
 <script type="module">
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-document.getElementById("loginMessage").textContent =
-"Admin script started. Connecting to Firebase...";
+
 import {
 initializeApp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
 import {
 getAuth,
@@ -330,6 +527,7 @@ signInWithEmailAndPassword,
 signOut,
 sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 
 import {
 getFirestore,
@@ -346,20 +544,32 @@ serverTimestamp
 /* FIREBASE CONFIGURATION */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyA-AFHmu2oQVPW2fegLtMo8MCIQvSAD_Ow",
+
+    apiKey: "AIzaSyA-AFHmu2oQVP2WfegLtMo8MCIQvSAD_Ow",
+
     authDomain: "jessygist-web.firebaseapp.com",
+
     projectId: "jessygist-web",
+
     storageBucket: "jessygist-web.firebasestorage.app",
+
     messagingSenderId: "525204408186",
+
     appId: "1:525204408186:web:1258ae725d2987346878c3",
+
     measurementId: "G-5MKSXMHBYL"
+
 };
 
 
 /* CLOUDINARY CONFIGURATION */
 
 const CLOUDINARY_CLOUD_NAME = "kylngca3";
+
 const CLOUDINARY_UPLOAD_PRESET = "jessygist_upload";
+
+
+/* ADMIN ACCOUNT */
 
 const ADMIN_EMAIL = "nkemharry70@gmail.com";
 
@@ -369,17 +579,27 @@ const ADMIN_EMAIL = "nkemharry70@gmail.com";
 const $ = id => document.getElementById(id);
 
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
+
 const db = getFirestore(app);
 
+
 let currentUser = null;
+
 let selectedPreviewUrl = null;
 
 
+/* MESSAGE FUNCTION */
+
 function message(id,text){
+
     $(id).textContent = text;
+
 }
 
+
+/* SHOW DASHBOARD */
 
 function showDashboard(show){
 
@@ -390,27 +610,39 @@ function showDashboard(show){
 }
 
 
+/* CHECK ADMIN */
+
 function isAdmin(user){
 
     return Boolean(
+
         user &&
+
         user.email &&
+
         user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()
+
     );
 
 }
 
 
+/* PROTECT ADMIN ACTIONS */
+
 function requireAdmin(){
 
     if(!isAdmin(currentUser)){
-        throw new Error("Please sign in with the configured administrator account.");
+
+        throw new Error(
+            "Please sign in with the configured administrator account."
+        );
+
     }
 
 }
 
 
-/* ADMIN LOGIN */
+/* LOGIN */
 
 $("loginForm").addEventListener("submit",async event=>{
 
@@ -418,51 +650,33 @@ $("loginForm").addEventListener("submit",async event=>{
 
     $("loginButton").disabled = true;
 
-    message("loginMessage","Signing in…");
+    message("loginMessage","Signing in...");
 
     try{
 
-        const credential = await signInWithEmailAndPassword(
+        await signInWithEmailAndPassword(
+
             auth,
+
             $("email").value.trim(),
+
             $("password").value
+
         );
 
-        currentUser = credential.user;
-
-        if(!isAdmin(currentUser)){
-
-            message(
-                "loginMessage",
-                "Signed in, but this email is not the configured administrator."
-            );
-
-            await signOut(auth);
-
-            showDashboard(false);
-
-            return;
-
-        }
-
-        $("adminEmail").textContent = currentUser.email || "";
-
-        showDashboard(true);
-
-        await loadArticles();
-
-        message("loginMessage","Dashboard opened successfully.");
+        message(
+            "loginMessage",
+            "Sign-in successful. Opening dashboard..."
+        );
 
     }catch(error){
 
-        console.error("JessyGist sign-in error:",error);
+        console.error("Login error:",error);
 
-        const code = error?.code || "";
-
-        const friendly = {
+        const errors = {
 
             "auth/invalid-api-key":
-            "Firebase rejected the API key. Check the Firebase project configuration and API key restrictions.",
+            "Firebase API key is invalid.",
 
             "auth/invalid-credential":
             "Email or password is incorrect.",
@@ -471,26 +685,27 @@ $("loginForm").addEventListener("submit",async event=>{
             "Password is incorrect.",
 
             "auth/user-not-found":
-            "No Firebase user was found for this email.",
+            "Administrator account was not found.",
 
             "auth/invalid-email":
-            "Please enter a valid email address.",
+            "Enter a valid email address.",
 
             "auth/too-many-requests":
-            "Too many attempts. Wait before trying again.",
+            "Too many attempts. Please wait and retry.",
 
             "auth/network-request-failed":
-            "Network request failed. Check your internet connection.",
-
-            "permission-denied":
-            "Firestore denied access. Check Firestore security rules."
+            "Network error. Check your internet connection."
 
         };
 
         message(
+
             "loginMessage",
-            friendly[code] ||
-            `Sign-in/dashboard error (${code || "unknown"}): ${error?.message || "Please retry."}`
+
+            errors[error.code] ||
+
+            `Login failed: ${error.message}`
+
         );
 
     }finally{
@@ -510,7 +725,10 @@ $("forgotPassword").addEventListener("click",async()=>{
 
     if(!email){
 
-        message("loginMessage","Enter your email address first.");
+        message(
+            "loginMessage",
+            "Enter your email address first."
+        );
 
         return;
 
@@ -522,7 +740,7 @@ $("forgotPassword").addEventListener("click",async()=>{
 
         message(
             "loginMessage",
-            "If password reset is available for this account, Firebase will send an email."
+            "If password reset is available, Firebase will send a reset email."
         );
 
     }catch(error){
@@ -531,7 +749,7 @@ $("forgotPassword").addEventListener("click",async()=>{
 
         message(
             "loginMessage",
-            `Password reset failed (${error?.code || "unknown"}).`
+            `Password reset failed: ${error.code || error.message}`
         );
 
     }
@@ -549,11 +767,15 @@ onAuthStateChanged(auth,async user=>{
 
         showDashboard(false);
 
-        message("loginMessage","Please sign in.");
+        message(
+            "loginMessage",
+            "Please sign in to access the dashboard."
+        );
 
         return;
 
     }
+
 
     if(!isAdmin(user)){
 
@@ -578,6 +800,7 @@ onAuthStateChanged(auth,async user=>{
 
     }
 
+
     $("adminEmail").textContent = user.email || "";
 
     showDashboard(true);
@@ -588,11 +811,11 @@ onAuthStateChanged(auth,async user=>{
 
     }catch(error){
 
-        console.error("Dashboard load error:",error);
+        console.error("Dashboard error:",error);
 
         message(
             "listMessage",
-            `Dashboard opened, but articles could not load (${error?.code || error?.message || "unknown error"}).`
+            `Could not load articles: ${error.code || error.message}`
         );
 
     }
@@ -608,11 +831,19 @@ $("logoutButton").addEventListener("click",async()=>{
 
         await signOut(auth);
 
+        message(
+            "loginMessage",
+            "You have signed out successfully."
+        );
+
     }catch(error){
 
         console.error(error);
 
-        message("loginMessage","Could not sign out. Refresh and try again.");
+        message(
+            "loginMessage",
+            "Could not sign out. Please retry."
+        );
 
     }
 
@@ -637,25 +868,34 @@ $("imageFile").addEventListener("change",()=>{
 
     if(!file)return;
 
+
     if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
 
         $("imageFile").value = "";
 
-        message("uploadMessage","Choose a JPG, PNG, or WebP image.");
+        message(
+            "uploadMessage",
+            "Choose a JPG, PNG or WebP image."
+        );
 
         return;
 
     }
+
 
     if(file.size > 5*1024*1024){
 
         $("imageFile").value = "";
 
-        message("uploadMessage","Image must be 5 MB or smaller.");
+        message(
+            "uploadMessage",
+            "Image must be 5 MB or smaller."
+        );
 
         return;
 
     }
+
 
     selectedPreviewUrl = URL.createObjectURL(file);
 
@@ -663,7 +903,10 @@ $("imageFile").addEventListener("change",()=>{
 
     $("uploadPreview").classList.remove("hidden");
 
-    message("uploadMessage","Image selected. Ready to upload.");
+    message(
+        "uploadMessage",
+        "Image selected. Ready to upload."
+    );
 
 });
 
@@ -680,33 +923,56 @@ $("uploadButton").addEventListener("click",async()=>{
 
         if(!file){
 
-            message("uploadMessage","Choose an image first.");
+            message(
+                "uploadMessage",
+                "Choose an image first."
+            );
 
             return;
 
         }
 
+
         $("uploadButton").disabled = true;
 
-        message("uploadMessage","Uploading image…");
+        message(
+            "uploadMessage",
+            "Uploading image..."
+        );
+
 
         const formData = new FormData();
 
         formData.append("file",file);
 
-        formData.append("upload_preset",CLOUDINARY_UPLOAD_PRESET);
-
-        formData.append("folder","jessygist");
-
-        const response = await fetch(
-            `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
-            {
-                method:"POST",
-                body:formData
-            }
+        formData.append(
+            "upload_preset",
+            CLOUDINARY_UPLOAD_PRESET
         );
 
+        formData.append(
+            "folder",
+            "jessygist"
+        );
+
+
+        const response = await fetch(
+
+            `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+
+            {
+
+                method:"POST",
+
+                body:formData
+
+            }
+
+        );
+
+
         const result = await response.json();
+
 
         if(!response.ok || !result.secure_url){
 
@@ -716,6 +982,7 @@ $("uploadButton").addEventListener("click",async()=>{
 
         }
 
+
         $("uploadedImageUrl").value = result.secure_url;
 
         $("imageUrl").value = result.secure_url;
@@ -724,16 +991,21 @@ $("uploadButton").addEventListener("click",async()=>{
 
         $("articleImagePreview").classList.remove("hidden");
 
+
         message(
             "uploadMessage",
-            "Image uploaded successfully. URL added to article form."
+            "Image uploaded successfully. URL added to article."
         );
+
 
     }catch(error){
 
         console.error(error);
 
-        message("uploadMessage",error.message || "Image upload failed.");
+        message(
+            "uploadMessage",
+            error.message || "Image upload failed."
+        );
 
     }finally{
 
@@ -752,17 +1024,24 @@ $("copyImageUrl").addEventListener("click",async()=>{
 
     if(!url){
 
-        message("uploadMessage","Upload an image first.");
+        message(
+            "uploadMessage",
+            "Upload an image first."
+        );
 
         return;
 
     }
 
+
     try{
 
         await navigator.clipboard.writeText(url);
 
-        message("uploadMessage","Image URL copied.");
+        message(
+            "uploadMessage",
+            "Image URL copied successfully."
+        );
 
     }catch{
 
@@ -770,14 +1049,17 @@ $("copyImageUrl").addEventListener("click",async()=>{
 
         $("uploadedImageUrl").select();
 
-        message("uploadMessage","Select and copy the URL manually.");
+        message(
+            "uploadMessage",
+            "Select and copy the URL manually."
+        );
 
     }
 
 });
 
 
-/* USE IMAGE */
+/* USE IMAGE IN ARTICLE */
 
 $("useImage").addEventListener("click",()=>{
 
@@ -785,11 +1067,15 @@ $("useImage").addEventListener("click",()=>{
 
     if(!url){
 
-        message("uploadMessage","Upload an image first.");
+        message(
+            "uploadMessage",
+            "Upload an image first."
+        );
 
         return;
 
     }
+
 
     $("imageUrl").value = url;
 
@@ -797,7 +1083,10 @@ $("useImage").addEventListener("click",()=>{
 
     $("articleImagePreview").classList.remove("hidden");
 
-    message("uploadMessage","Image URL added to article form.");
+    message(
+        "uploadMessage",
+        "Image added to article."
+    );
 
 });
 
@@ -818,12 +1107,14 @@ $("imageUrl").addEventListener("input",()=>{
 
         $("articleImagePreview").classList.add("hidden");
 
+        $("articleImagePreview").removeAttribute("src");
+
     }
 
 });
 
 
-/* CLEAR ARTICLE FORM */
+/* CLEAR EDITOR */
 
 function clearEditor(){
 
@@ -837,10 +1128,14 @@ function clearEditor(){
 
     $("articleImagePreview").classList.add("hidden");
 
+    $("articleImagePreview").removeAttribute("src");
+
     message("articleMessage","");
 
 }
 
+
+/* CLEAR BUTTON */
 
 $("clearButton").addEventListener("click",clearEditor);
 
@@ -854,6 +1149,7 @@ $("articleForm").addEventListener("submit",async event=>{
     try{
 
         requireAdmin();
+
 
         const title = $("title").value.trim();
 
@@ -869,63 +1165,97 @@ $("articleForm").addEventListener("submit",async event=>{
 
         const articleId = $("articleId").value;
 
+
         if(!title || !content){
 
-            message("articleMessage","Enter a headline and article content.");
+            message(
+                "articleMessage",
+                "Enter an article headline and content."
+            );
 
             return;
 
         }
+
 
         if(imageUrl && !imageUrl.startsWith("https://")){
 
-            message("articleMessage","Image URL must begin with https://.");
+            message(
+                "articleMessage",
+                "Image URL must begin with https://."
+            );
 
             return;
 
         }
 
+
         $("saveButton").disabled = true;
 
-        message("articleMessage","Saving article…");
+        message(
+            "articleMessage",
+            "Saving article..."
+        );
+
 
         const data = {
 
             title,
+
             category,
+
             summary,
+
             content,
+
             imageUrl,
+
             status,
+
             updatedAt:serverTimestamp()
 
         };
 
+
         if(articleId){
 
             await updateDoc(
+
                 doc(db,"articles",articleId),
+
                 data
+
             );
 
-            message("articleMessage","Article updated successfully.");
+            message(
+                "articleMessage",
+                "Article updated successfully."
+            );
 
         }else{
 
             data.createdAt = serverTimestamp();
 
             await addDoc(
+
                 collection(db,"articles"),
+
                 data
+
             );
 
-            message("articleMessage","Article saved successfully.");
+            message(
+                "articleMessage",
+                "Article saved successfully."
+            );
 
         }
+
 
         clearEditor();
 
         await loadArticles();
+
 
     }catch(error){
 
@@ -933,7 +1263,7 @@ $("articleForm").addEventListener("submit",async event=>{
 
         message(
             "articleMessage",
-            `Could not save article (${error?.code || error?.message || "unknown error"}).`
+            `Could not save article: ${error.code || error.message}`
         );
 
     }finally{
@@ -951,136 +1281,359 @@ async function loadArticles(){
 
     requireAdmin();
 
-    message("listMessage","Loading articles…");
+    message(
+        "listMessage",
+        "Loading articles..."
+    );
 
-    const snapshot = await getDocs(collection(db,"articles"));
+
+    const snapshot = await getDocs(
+
+        collection(db,"articles")
+
+    );
+
 
     const articles = [];
 
     snapshot.forEach(s=>{
 
         articles.push({
+
             id:s.id,
+
             ...s.data()
+
         });
 
     });
 
+
     articles.sort((a,b)=>
+
         (b.createdAt?.seconds || 0) -
+
         (a.createdAt?.seconds || 0)
+
     );
+
 
     const list = $("articleList");
 
     list.replaceChildren();
 
+
     if(!articles.length){
 
-        message("listMessage","No articles found yet.");
+        message(
+            "listMessage",
+            "No articles found yet."
+        );
 
         return;
 
     }
+
 
     message(
         "listMessage",
         `${articles.length} article(s) found.`
     );
 
+
     for(const article of articles){
+
 
         const card = document.createElement("article");
 
         card.className = "article";
 
+
+        /* ARTICLE TITLE */
+
         const heading = document.createElement("h3");
 
-        heading.textContent = article.title || "Untitled article";
+        heading.textContent =
+            article.title || "Untitled article";
+
+
+        /* ARTICLE DETAILS */
 
         const details = document.createElement("p");
 
         details.className = "muted";
 
         details.textContent =
+
             `Category: ${article.category || "Uncategorized"} | Status: ${article.status || "draft"}`;
+
+
+        /* ARTICLE SUMMARY */
 
         const summary = document.createElement("p");
 
         summary.textContent =
+
             article.summary ||
+
             (article.content || "").slice(0,180);
 
-        card.append(heading,details,summary);
+
+        card.append(
+            heading,
+            details,
+            summary
+        );
+
+
+        /* ARTICLE IMAGE */
 
         const imageUrl = article.imageUrl || article.image || "";
 
         if(imageUrl.startsWith("https://")){
 
-    $("articleImagePreview").src = imageUrl;
+            const image = document.createElement("img");
 
-    $("articleImagePreview").classList.remove("hidden");
+            image.src = imageUrl;
 
-}else{
+            image.alt = article.title || "Article image";
 
-    $("articleImagePreview").classList.add("hidden");
+            image.loading = "lazy";
 
-    $("articleImagePreview").removeAttribute("src");
+            image.onerror = ()=>{
 
-}
+                image.remove();
 
-});
+            };
+
+            card.appendChild(image);
+
+        }
 
 
-card.append(edit);
+        /* ARTICLE ACTIONS */
+
+        const actions = document.createElement("div");
+
+        actions.className = "article-actions";
 
 
-/* DELETE BUTTON */
+        /* EDIT BUTTON */
 
-const deleteButton = document.createElement("button");
+        const edit = document.createElement("button");
 
-deleteButton.type = "button";
+        edit.type = "button";
 
-deleteButton.textContent = "Delete";
+        edit.textContent = "Edit Article";
 
-deleteButton.className = "danger";
+        edit.addEventListener("click",()=>{
 
-deleteButton.addEventListener("click",async()=>{
+            requireAdmin();
 
-    if(!confirm("Are you sure you want to delete this article?")){
-        return;
+            $("articleId").value = article.id;
+
+            $("title").value = article.title || "";
+
+            $("category").value = article.category || "Latest News";
+
+            $("summary").value = article.summary || "";
+
+            $("content").value = article.content || "";
+
+            $("imageUrl").value = imageUrl;
+
+            $("status").value = article.status || "draft";
+
+
+            $("editorHeading").textContent = "Edit Article";
+
+            $("saveButton").textContent = "Update Article";
+
+
+            if(imageUrl.startsWith("https://")){
+
+                $("articleImagePreview").src = imageUrl;
+
+                $("articleImagePreview").classList.remove("hidden");
+
+            }else{
+
+                $("articleImagePreview").classList.add("hidden");
+
+            }
+
+
+            $("editorHeading").scrollIntoView({
+
+                behavior:"smooth",
+
+                block:"start"
+
+            });
+
+        });
+
+
+        actions.appendChild(edit);
+
+
+        /* PUBLISH / DRAFT BUTTON */
+
+        const statusButton = document.createElement("button");
+
+        statusButton.type = "button";
+
+        statusButton.className = "secondary";
+
+        statusButton.textContent =
+
+            article.status === "published"
+
+            ? "Move to Draft"
+
+            : "Publish";
+
+
+        statusButton.addEventListener("click",async()=>{
+
+            try{
+
+                requireAdmin();
+
+                statusButton.disabled = true;
+
+
+                const newStatus =
+
+                    article.status === "published"
+
+                    ? "draft"
+
+                    : "published";
+
+
+                await updateDoc(
+
+                    doc(db,"articles",article.id),
+
+                    {
+
+                        status:newStatus,
+
+                        updatedAt:serverTimestamp()
+
+                    }
+
+                );
+
+
+                message(
+                    "listMessage",
+                    `Article moved to ${newStatus}.`
+                );
+
+
+                await loadArticles();
+
+
+            }catch(error){
+
+                console.error(error);
+
+                message(
+                    "listMessage",
+                    `Status update failed: ${error.code || error.message}`
+                );
+
+            }finally{
+
+                statusButton.disabled = false;
+
+            }
+
+        });
+
+
+        actions.appendChild(statusButton);
+
+
+        /* DELETE BUTTON */
+
+        const deleteButton = document.createElement("button");
+
+        deleteButton.type = "button";
+
+        deleteButton.textContent = "Delete";
+
+        deleteButton.className = "danger";
+
+
+        deleteButton.addEventListener("click",async()=>{
+
+
+            if(!confirm("Are you sure you want to delete this article?")){
+
+                return;
+
+            }
+
+
+            try{
+
+                requireAdmin();
+
+                deleteButton.disabled = true;
+
+
+                await deleteDoc(
+
+                    doc(db,"articles",article.id)
+
+                );
+
+
+                message(
+                    "listMessage",
+                    "Article deleted successfully."
+                );
+
+
+                if($("articleId").value === article.id){
+
+                    clearEditor();
+
+                }
+
+
+                await loadArticles();
+
+
+            }catch(error){
+
+                console.error(error);
+
+                message(
+                    "listMessage",
+                    `Delete failed: ${error.code || error.message}`
+                );
+
+            }finally{
+
+                deleteButton.disabled = false;
+
+            }
+
+        });
+
+
+        actions.appendChild(deleteButton);
+
+
+        card.appendChild(actions);
+
+        list.appendChild(card);
+
     }
-
-    try{
-
-        requireAdmin();
-
-        await deleteDoc(
-            doc(db,"articles",article.id)
-        );
-
-        message("listMessage","Article deleted successfully.");
-
-        await loadArticles();
-
-    }catch(error){
-
-        console.error(error);
-
-        message(
-            "listMessage",
-            "Delete failed: " + (error.message || "Unknown error")
-        );
-
-    }
-
-});
-
-card.append(deleteButton);
-
-list.append(card);
-
-}
 
 }
 
@@ -1093,6 +1646,8 @@ $("refreshButton").addEventListener("click",async()=>{
 
         requireAdmin();
 
+        $("refreshButton").disabled = true;
+
         await loadArticles();
 
     }catch(error){
@@ -1101,14 +1656,21 @@ $("refreshButton").addEventListener("click",async()=>{
 
         message(
             "listMessage",
-            "Could not refresh articles: " + error.message
+            `Refresh failed: ${error.code || error.message}`
         );
+
+    }finally{
+
+        $("refreshButton").disabled = false;
 
     }
 
 });
 
+
 </script>
 
 </body>
+
 </html>
+ 
